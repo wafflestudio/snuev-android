@@ -1,4 +1,4 @@
-package com.wafflestudio.snuev.views.base
+package com.wafflestudio.snuev.view.base
 
 import android.support.v7.app.AppCompatActivity
 
