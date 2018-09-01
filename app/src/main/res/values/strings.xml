@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">snuev</string>
+
+    <!-- header -->
+    <string name="header_latest_evaluations">최근 강의평</string>
+    <string name="header_most_evaluated_lectures">강의평이 많은 강의</string>
+    <string name="header_top_rated_lectures">평점이 높은 강의</string>
+    <string name="header_most_liked_evaluations">추천 강의평</string>
+
+    <!-- criteria -->
+    <string name="criteria_score">/총점</string>
+    <string name="criteria_easiness">/난이도 쉬움</string>
+    <string name="criteria_grading">/학점 잘 줌</string>
+
+    <!-- score -->
+    <string name="score_0_decimals">%.0f</string>
+    <string name="score_1_decimals">%.1f</string>
+
+    <!-- detail -->
+    <string name="lecture_details">%1$s \u00B7 %2$s \u00B7 %3$s 교수</string>
+
+    <!-- semester -->
+    <string name="semester_spring">%1$d 1학기</string>
+    <string name="semester_summer">%1$d 여름 계절</string>
+    <string name="semester_fall">%1$d 2학기</string>
+    <string name="semester_winter">%1$d 겨울 계절</string>
 </resources>

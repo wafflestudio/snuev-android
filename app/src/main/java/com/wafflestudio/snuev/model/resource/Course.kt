@@ -5,12 +5,15 @@ import moe.banana.jsonapi2.HasOne
 import moe.banana.jsonapi2.JsonApi
 import moe.banana.jsonapi2.Resource
 
-@JsonApi(type = "users")
-class User : Resource() {
-    val nickname: String = ""
-    val username: String = ""
-    val email: String = ""
-    @field:Json(name = "is_confirmed") val isConfirmed: Boolean = false
+@JsonApi(type = "courses")
+class Course : Resource() {
+    val id: Int? = null
+    val name: String = ""
+    @field:Json(name = "target_grade") val targetGrade: String = ""
+    val category: Int? = null
+    @field:Json(name = "lecture_unit") val lectureUnit: Int = 0
+    @field:Json(name = "lab_unit") val labUnit: Int = 0
+    @field:Json(name = "total_unit") val totalUnit: Int = 0
     @field:Json(name = "created_at") val createdAt: String = ""
     @field:Json(name = "updated_at") val updatedAt: String = ""
 

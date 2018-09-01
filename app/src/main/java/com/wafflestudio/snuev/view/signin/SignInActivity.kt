@@ -1,20 +1,47 @@
 package com.wafflestudio.snuev.view.signin
 
+import android.app.Activity
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ActivitySignInBinding
 import com.wafflestudio.snuev.view.base.BaseActivity
+import com.wafflestudio.snuev.view.main.MainActivity
 
 class SignInActivity : BaseActivity() {
+    companion object {
+        const val TAG = "_SignIn"
+        const val REQUEST_CODE = 1
+
+        fun startActivity(activity: Activity) {
+            val intent = Intent(activity, SignInActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            activity.startActivityForResult(intent, REQUEST_CODE)
+        }
+    }
+
     private lateinit var viewModel: SignInViewModel
     private lateinit var binding: ActivitySignInBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         viewModel = ViewModelProviders.of(this).get(SignInViewModel::class.java)
-        binding =  DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         binding.viewmodel = viewModel
+
+        createObservers()
+    }
+
+    private fun createObservers() {
+        viewModel.user.observe(this, Observer { user ->
+            user?.let {
+                MainActivity.startActivity(this)
+                finish()
+            }
+        })
     }
 }

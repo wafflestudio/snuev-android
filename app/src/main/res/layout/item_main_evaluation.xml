@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/text_lecture_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="영어 대중소설 읽기"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        />
+
+    <TextView
+        android:id="@+id/text_semester"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:text="2017 봄"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/text_lecture_name"
+        app:layout_constraintStart_toEndOf="@+id/text_lecture_name"
+        app:layout_constraintTop_toTopOf="@+id/text_lecture_name"
+        />
+
+    <TextView
+        android:id="@+id/text_lecture_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="영어영문학과 3학년 김소연 교수"
+        android:textColor="@color/black_60"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_lecture_name"
+        />
+
+    <TextView
+        android:id="@+id/text_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:text="0"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
+        />
+
+    <TextView
+        android:id="@+id/text_criteria_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/criteria_score"
+        app:layout_constraintBottom_toBottomOf="@+id/text_score"
+        app:layout_constraintStart_toEndOf="@+id/text_score"
+        app:layout_constraintTop_toTopOf="@+id/text_score"
+        />
+
+    <TextView
+        android:id="@+id/text_easiness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="0"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/text_criteria_score"
+        app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
+        />
+
+    <TextView
+        android:id="@+id/text_criteria_easiness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/criteria_easiness"
+        app:layout_constraintBottom_toBottomOf="@+id/text_easiness"
+        app:layout_constraintStart_toEndOf="@+id/text_easiness"
+        app:layout_constraintTop_toTopOf="@+id/text_easiness"
+        />
+
+    <TextView
+        android:id="@+id/text_grading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:text="0"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@+id/text_criteria_easiness"
+        app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
+        />
+
+    <TextView
+        android:id="@+id/text_criteria_grading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/criteria_grading"
+        app:layout_constraintBottom_toBottomOf="@+id/text_grading"
+        app:layout_constraintStart_toEndOf="@+id/text_grading"
+        app:layout_constraintTop_toTopOf="@+id/text_grading"
+        />
+
+    <TextView
+        android:id="@+id/text_evaluation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="9dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_score"
+        />
+
+    <TextView
+        android:id="@+id/text_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black_40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_evaluation"
+        />
+
+    <TextView
+        android:id="@+id/text_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black_40"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/text_date"
+        app:layout_constraintTop_toBottomOf="@+id/text_evaluation"
+        />
+
+</android.support.constraint.ConstraintLayout>

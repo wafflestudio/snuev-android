@@ -1,5 +1,6 @@
 package com.wafflestudio.snuev.view.signin
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import com.squareup.moshi.Moshi
@@ -18,6 +19,8 @@ class SignInViewModel : ViewModel() {
     val username = ObservableField<String>()
     val password = ObservableField<String>()
 
+    val user: MutableLiveData<User> = MutableLiveData()
+
     fun signIn() {
         val username = username.get() ?: return
         val password = password.get() ?: return
@@ -27,8 +30,8 @@ class SignInViewModel : ViewModel() {
                 .doOnSubscribe { onSignInRequest() }
                 .doOnTerminate { onSignInFinish() }
                 .subscribe(
-                        { response -> onSignInSuccess(response) },
-                        { onSignInFailure() }
+                        { onSignInSuccess(it) },
+                        { onSignInFailure(it) }
                 ))
     }
 
@@ -39,16 +42,14 @@ class SignInViewModel : ViewModel() {
                 .doOnSubscribe { onFetchUserRequest() }
                 .doOnTerminate { onFetchUserFinish() }
                 .subscribe(
-                        { response -> onFetchUserSuccess(response) },
-                        { onFetchUserFailure() }
+                        { onFetchUserSuccess(it) },
+                        { onFetchUserFailure(it) }
                 ))
     }
 
-    private fun onSignInRequest() {
-    }
+    private fun onSignInRequest() {}
 
-    private fun onSignInFinish() {
-    }
+    private fun onSignInFinish() {}
 
     private fun onSignInSuccess(response: Document) {
         val moshi = Moshi.Builder().build()
@@ -58,20 +59,18 @@ class SignInViewModel : ViewModel() {
         fetchUser()
     }
 
-    private fun onSignInFailure() {
+    private fun onSignInFailure(error: Throwable) {}
+
+    private fun onFetchUserRequest() {}
+
+    private fun onFetchUserFinish() {}
+
+    private fun onFetchUserSuccess(response: User) {
+        SnuevPreference.user = response
+        user.value = response
     }
 
-    private fun onFetchUserRequest() {
-    }
-
-    private fun onFetchUserFinish() {
-    }
-
-    private fun onFetchUserSuccess(user: User) {
-    }
-
-    private fun onFetchUserFailure() {
-    }
+    private fun onFetchUserFailure(error: Throwable) {}
 
     override fun onCleared() {
         super.onCleared()
