@@ -114,7 +114,6 @@
                     />
 
             </android.support.constraint.ConstraintLayout>
-
         </android.support.v4.widget.NestedScrollView>
 
         <android.support.design.widget.AppBarLayout
@@ -125,6 +124,5 @@
 
             <include layout="@layout/bar_navigation" />
         </android.support.design.widget.AppBarLayout>
-
     </android.support.design.widget.CoordinatorLayout>
 </layout>

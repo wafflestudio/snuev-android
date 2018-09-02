@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_border_bottom_black_30"
+    >
+
+    <TextView
+        android:id="@+id/text_lecture_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:textColor="@color/black_80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/text_lecture_code"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_lecture_name"
+        />
+
+    <TextView
+        android:id="@+id/text_lecture_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_lecture_code"
+        />
+
+    <ImageView
+        android:id="@+id/image_view_count"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:src="@drawable/ic_view"
+        app:layout_constraintBottom_toBottomOf="@+id/text_lecture_view_count"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_lecture_view_count"
+        />
+
+    <TextView
+        android:id="@+id/text_lecture_view_count"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/image_evaluation_count"
+        app:layout_constraintStart_toEndOf="@+id/image_view_count"
+        app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
+        />
+
+    <ImageView
+        android:id="@+id/image_evaluation_count"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:src="@drawable/ic_content"
+        app:layout_constraintBottom_toBottomOf="@+id/text_lecture_evaluation_count"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/text_lecture_evaluation_count"
+        />
+
+    <TextView
+        android:id="@+id/text_lecture_evaluation_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/image_evaluation_count"
+        app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
+        />
+
+    <TextView
+        android:id="@+id/text_lecture_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.0"
+        android:textColor="@color/black_80"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</android.support.constraint.ConstraintLayout>

@@ -10,7 +10,7 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ActivityMainBinding
 import com.wafflestudio.snuev.view.base.BaseActivity
-import com.wafflestudio.snuev.view.signin.SignInActivity
+import com.wafflestudio.snuev.view.search.SearchActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bar_navigation.*
 
@@ -48,7 +48,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupEvents() {
-        button_sign_out.clicks().subscribe { SignInActivity.startActivity(this) }
+        button_search.clicks().subscribe { SearchActivity.startActivity(this) }
     }
 
     private fun setupRecyclerViews() {

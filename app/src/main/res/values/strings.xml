@@ -24,4 +24,7 @@
     <string name="semester_summer">%1$d 여름 계절</string>
     <string name="semester_fall">%1$d 2학기</string>
     <string name="semester_winter">%1$d 겨울 계절</string>
+
+    <!-- desc -->
+    <string name="desc_no_search_result">키워드를 직접 입력하거나, 상세조건 검색을 통해 원하는 강의를 찾아보세요!</string>
 </resources>

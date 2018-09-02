@@ -1,14 +1,12 @@
 package com.wafflestudio.snuev.network
 
+import com.wafflestudio.snuev.model.resource.Course
 import com.wafflestudio.snuev.model.resource.Evaluation
 import com.wafflestudio.snuev.model.resource.Lecture
 import com.wafflestudio.snuev.model.resource.User
 import io.reactivex.Observable
 import moe.banana.jsonapi2.Document
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface SnuevEndpoint {
     @POST("v1/user/sign_in")
@@ -30,4 +28,10 @@ interface SnuevEndpoint {
 
     @GET("v1/evaluations/most_liked")
     fun fetchMostLikedEvaluations(): Observable<List<Evaluation>>
+
+    @GET("v1/courses/search")
+    fun searchCourses(@Query("q") query: String): Observable<List<Course>>
+
+    @GET("v1/lectures/search")
+    fun searchLectures(@Query("q") query: String): Observable<List<Lecture>>
 }
