@@ -34,4 +34,10 @@ interface SnuevEndpoint {
 
     @GET("v1/lectures/search")
     fun searchLectures(@Query("q") query: String): Observable<List<Lecture>>
+
+    @GET("v1/lectures/{lecture_id}")
+    fun fetchLecture(@Path("lecture_id") lectureId: String): Observable<Lecture>
+
+    @GET("v1/lectures/{lecture_id}/evaluations")
+    fun fetchLectureEvaluations(@Path("lecture_id") lectureId: String, @Query("page") page: Int): Observable<List<Evaluation>>
 }

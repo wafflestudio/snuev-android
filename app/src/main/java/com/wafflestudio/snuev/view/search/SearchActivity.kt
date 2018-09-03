@@ -12,6 +12,7 @@ import com.jakewharton.rxbinding2.widget.textChanges
 import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ActivitySearchBinding
 import com.wafflestudio.snuev.view.base.BaseActivity
+import com.wafflestudio.snuev.view.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.bar_search.*
 import java.util.concurrent.TimeUnit
@@ -63,8 +64,10 @@ class SearchActivity : BaseActivity() {
 
     private fun setupRecyclerViews() {
         list_search_result_lectures.layoutManager = LinearLayoutManager(this)
-        list_search_result_lectures.adapter = SearchLectureAdapter(this, viewModel.searchResultLectures) {
-
+        list_search_result_lectures.adapter = SearchLectureAdapter(this, viewModel.searchResultLectures) { lecture ->
+            lecture.id?.let { lectureId ->
+                DetailActivity.startActivity(this, lectureId)
+            }
         }
     }
 }

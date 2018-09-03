@@ -24,6 +24,7 @@
         <activity android:name=".view.main.MainActivity" />
         <activity android:name=".view.signin.SignInActivity" />
         <activity android:name=".view.search.SearchActivity" />
+        <activity android:name=".view.detail.DetailActivity" />
     </application>
 
 </manifest>

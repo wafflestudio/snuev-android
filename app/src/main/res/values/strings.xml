@@ -6,11 +6,15 @@
     <string name="header_most_evaluated_lectures">강의평이 많은 강의</string>
     <string name="header_top_rated_lectures">평점이 높은 강의</string>
     <string name="header_most_liked_evaluations">추천 강의평</string>
+    <string name="header_evaluations">강의평</string>
 
     <!-- criteria -->
     <string name="criteria_score">/총점</string>
     <string name="criteria_easiness">/난이도 쉬움</string>
     <string name="criteria_grading">/학점 잘 줌</string>
+    <string name="criteria_no_slash_score">총점</string>
+    <string name="criteria_no_slash_easiness">난이도 쉬움</string>
+    <string name="criteria_no_slash_grading">학점 잘 줌</string>
 
     <!-- score -->
     <string name="score_0_decimals">%.0f</string>
@@ -27,4 +31,8 @@
 
     <!-- desc -->
     <string name="desc_no_search_result">키워드를 직접 입력하거나, 상세조건 검색을 통해 원하는 강의를 찾아보세요!</string>
+    <string name="desc_no_evaluations">강의평이 아직 없습니다. 첫 강의평을 작성해보세요!</string>
+
+    <!-- button -->
+    <string name="button_leave_review">강의평 쓰기</string>
 </resources>
