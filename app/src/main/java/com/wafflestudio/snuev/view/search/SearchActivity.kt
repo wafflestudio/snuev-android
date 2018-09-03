@@ -57,6 +57,8 @@ class SearchActivity : BaseActivity() {
         edit_search.textChanges()
                 .debounce(300, TimeUnit.MILLISECONDS)
                 .filter { it.isNotBlank() }
+                .map { it.toString() }
+                .distinctUntilChanged()
                 .subscribe {
                     viewModel.searchLectures(it.toString())
                 }
