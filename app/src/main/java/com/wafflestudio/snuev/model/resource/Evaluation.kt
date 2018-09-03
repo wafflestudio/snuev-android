@@ -6,11 +6,11 @@ import moe.banana.jsonapi2.JsonApi
 import moe.banana.jsonapi2.Resource
 
 @JsonApi(type = "evaluations")
-class Evaluation : Resource() {
-    val score: Float = 0f
-    val easiness: Float = 0f
-    val grading: Float = 0f
-    val comment: String = ""
+class Evaluation() : Resource() {
+    var score: Float = 0f
+    var easiness: Float = 0f
+    var grading: Float = 0f
+    var comment: String = ""
     @field:Json(name = "upvotes_count") val upvotesCount: Int = 0
     @field:Json(name = "downvotes_count") val downvotesCount: Int = 0
     val downvoted: Boolean = false

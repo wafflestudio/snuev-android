@@ -40,4 +40,7 @@ interface SnuevEndpoint {
 
     @GET("v1/lectures/{lecture_id}/evaluations")
     fun fetchLectureEvaluations(@Path("lecture_id") lectureId: String, @Query("page") page: Int): Observable<List<Evaluation>>
+
+    @POST("v1/lectures/{lecture_id}/evaluations")
+    fun createEvaluation(@Path("lecture_id") lectureId: String, @Body body: Evaluation): Observable<Evaluation>
 }

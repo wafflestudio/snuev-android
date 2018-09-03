@@ -8,9 +8,11 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.jakewharton.rxbinding2.view.clicks
 import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ActivityDetailBinding
 import com.wafflestudio.snuev.view.base.BaseActivity
+import com.wafflestudio.snuev.view.evaluate.EvaluateActivity
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : BaseActivity() {
@@ -40,6 +42,7 @@ class DetailActivity : BaseActivity() {
         binding.setLifecycleOwner(this)
 
         createObservables()
+        setupEvents()
         setupRecyclerViews()
     }
 
@@ -58,6 +61,14 @@ class DetailActivity : BaseActivity() {
             }
         })
    }
+
+    private fun setupEvents() {
+        button_leave_review.clicks().subscribe {
+            button_leave_review.isEnabled = false
+            EvaluateActivity.startActivity(this, lectureId, viewModel.lectureName.value ?: "")
+            button_leave_review.isEnabled = true
+        }
+    }
 
     private fun setupRecyclerViews() {
         list_evaluations.layoutManager = LinearLayoutManager(this)

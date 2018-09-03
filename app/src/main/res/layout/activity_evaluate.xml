@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.wafflestudio.snuev.view.evaluate.EvaluateViewModel"
+            />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:id="@+id/image_content"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/text_lecture_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/black_80"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/image_content"
+                    app:layout_constraintStart_toEndOf="@+id/image_content"
+                    app:layout_constraintTop_toTopOf="@+id/image_content"
+                    />
+
+                <ImageButton
+                    android:id="@+id/button_close"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_close"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/text_criteria_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/criteria_no_slash_score"
+                    android:textColor="@color/black_80"
+                    app:layout_constraintBottom_toTopOf="@+id/rating_score"
+                    app:layout_constraintStart_toStartOf="@+id/rating_score"
+                    />
+
+                <TextView
+                    android:id="@+id/text_score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(viewmodel.score)}"
+                    android:textColor="@color/black_90"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/rating_score"
+                    app:layout_constraintEnd_toEndOf="@+id/rating_score"
+                    />
+
+                <SeekBar
+                    android:id="@+id/rating_score"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="50dp"
+                    android:max="10"
+                    android:progress="@={viewmodel.score}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_content"
+                    />
+
+                <TextView
+                    android:id="@+id/text_criteria_easiness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/criteria_no_slash_easiness"
+                    android:textColor="@color/black_80"
+                    app:layout_constraintBottom_toTopOf="@+id/rating_easiness"
+                    app:layout_constraintStart_toStartOf="@+id/rating_easiness"
+                    />
+
+                <TextView
+                    android:id="@+id/text_easiness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(viewmodel.easiness)}"
+                    android:textColor="@color/black_90"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/rating_easiness"
+                    app:layout_constraintEnd_toEndOf="@+id/rating_easiness"
+                    />
+
+                <SeekBar
+                    android:id="@+id/rating_easiness"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="50dp"
+                    android:max="10"
+                    android:progress="@={viewmodel.easiness}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rating_score"
+                    />
+
+                <TextView
+                    android:id="@+id/text_criteria_easiness_hard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/criteria_easiness_hard"
+                    android:textColor="@color/black_40"
+                    app:layout_constraintStart_toStartOf="@+id/rating_easiness"
+                    app:layout_constraintTop_toBottomOf="@+id/rating_easiness"
+                    />
+
+                <TextView
+                    android:id="@+id/text_criteria_easiness_easy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/criteria_easiness_easy"
+                    android:textColor="@color/black_40"
+                    app:layout_constraintEnd_toEndOf="@+id/rating_easiness"
+                    app:layout_constraintTop_toBottomOf="@+id/rating_easiness"
+                    />
+
+                <TextView
+                    android:id="@+id/text_criteria_grading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/criteria_no_slash_grading"
+                    android:textColor="@color/black_80"
+                    app:layout_constraintBottom_toTopOf="@+id/rating_grading"
+                    app:layout_constraintStart_toStartOf="@+id/rating_grading"
+                    />
+
+                <TextView
+                    android:id="@+id/text_grading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(viewmodel.grading)}"
+                    android:textColor="@color/black_90"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/rating_grading"
+                    app:layout_constraintEnd_toEndOf="@+id/rating_grading"
+                    />
+
+                <SeekBar
+                    android:id="@+id/rating_grading"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="70dp"
+                    android:max="10"
+                    android:progress="@={viewmodel.grading}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rating_easiness"
+                    />
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@color/black_10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rating_grading"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_comment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/transparent"
+                    android:hint="@string/hint_leave_review"
+                    android:inputType="textMultiLine"
+                    android:scrollbars="vertical"
+                    android:text="@={viewmodel.comment}"
+                    app:layout_constraintBottom_toTopOf="@+id/button_evaluate"
+                    app:layout_constraintEnd_toEndOf="@+id/view3"
+                    app:layout_constraintStart_toStartOf="@+id/view3"
+                    app:layout_constraintTop_toBottomOf="@+id/view3"
+                    app:layout_constraintVertical_bias="0.0"
+                    />
+
+                <Button
+                    android:id="@+id/button_evaluate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/button_register"
+                    android:textColor="@color/colorBackground"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
