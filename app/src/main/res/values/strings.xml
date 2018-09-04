@@ -7,6 +7,7 @@
     <string name="header_top_rated_lectures">평점이 높은 강의</string>
     <string name="header_most_liked_evaluations">추천 강의평</string>
     <string name="header_evaluations">강의평</string>
+    <string name="header_profile">%1$s 님</string>
 
     <!-- criteria -->
     <string name="criteria_score">/총점</string>
@@ -38,7 +39,21 @@
     <!-- button -->
     <string name="button_leave_review">강의평 쓰기</string>
     <string name="button_register">등록</string>
+    <string name="button_change_password">변경하기</string>
 
     <!-- hint -->
     <string name="hint_leave_review">강의평을 입력하세요.</string>
+
+    <!-- tabs -->
+    <string name="tab_about">내 정보</string>
+    <string name="tab_evaluations">내가 쓴 강의평 목록</string>
+    <string name="tab_change_password">비밀번호 변경</string>
+
+    <!-- item -->
+    <string name="item_email">이메일</string>
+    <string name="item_nickname">별명</string>
+    <string name="item_department">학과명</string>
+    <string name="item_current_password">현재 비밀번호</string>
+    <string name="item_new_password">새로운 비밀번호</string>
+    <string name="item_check_password">비밀번호 확인</string>
 </resources>

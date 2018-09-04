@@ -28,6 +28,7 @@
         <activity
             android:name=".view.evaluate.EvaluateActivity"
             android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity android:name=".view.profile.ProfileActivity" />
     </application>
 
 </manifest>
