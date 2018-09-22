@@ -2,11 +2,13 @@ package com.wafflestudio.snuev.view.adapter
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData
+import android.databinding.DataBindingUtil
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.jakewharton.rxbinding2.view.clicks
 import com.wafflestudio.snuev.R
+import com.wafflestudio.snuev.databinding.ItemDepartmentBinding
 import com.wafflestudio.snuev.model.resource.Department
 import com.wafflestudio.snuev.view.base.BaseAdapter
 import com.wafflestudio.snuev.view.base.BaseViewHolder
@@ -28,12 +30,10 @@ class DepartmentAdapter(
             view: View,
             private val onItemClick: (Department) -> Unit
     ) : BaseViewHolder<Department>(view) {
-        private lateinit var department: Department
+        private val binding by lazy { DataBindingUtil.bind<ItemDepartmentBinding>(view) }
 
         override fun bind(data: Department) {
-            department = data
-            view.text_department_name.text = department.name
-
+            binding?.department = data
             view.clicks().subscribe { onItemClick(data) }
         }
     }
