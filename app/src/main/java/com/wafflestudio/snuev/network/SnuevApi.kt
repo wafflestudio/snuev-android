@@ -1,6 +1,7 @@
 package com.wafflestudio.snuev.network
 
 import com.squareup.moshi.Moshi
+import com.wafflestudio.snuev.SnuevApplication
 import com.wafflestudio.snuev.model.resource.*
 import com.wafflestudio.snuev.preference.SnuevPreference
 import com.wafflestudio.snuev.util.BASE_URL
@@ -12,8 +13,15 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import javax.net.ssl.HttpsURLConnection
 
 object SnuevApi {
+    private var application: SnuevApplication? = null
+
+    fun init(application: SnuevApplication) {
+        this.application = application
+    }
+
     val service by lazy {
         val jsonAdapterFactory = ResourceAdapterFactory.builder()
                 .add(Course::class.java)
@@ -37,7 +45,12 @@ object SnuevApi {
                         builder.addHeader(HEADER_AUTH, token)
                     } ?: let {
                     }
-                    chain.proceed(builder.build())
+
+                    val response = chain.proceed(builder.build())
+                    if (response.code() == HttpsURLConnection.HTTP_UNAUTHORIZED) {
+                        application?.signOut()
+                    }
+                    response
                 }
                 .build()
         val retrofit = Retrofit.Builder()

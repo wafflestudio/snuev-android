@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import com.jakewharton.rxbinding2.view.clicks
 import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ActivityProfileBinding
 import com.wafflestudio.snuev.preference.SnuevPreference
@@ -34,6 +35,7 @@ class ProfileActivity : BaseActivity() {
 
         setupPager()
         setupViews()
+        setupEvents()
     }
 
     private fun setupPager() {
@@ -43,5 +45,11 @@ class ProfileActivity : BaseActivity() {
 
     private fun setupViews() {
         text_nickname.text = SnuevPreference.user?.nickname ?: ""
+    }
+
+    private fun setupEvents() {
+        btn_sign_out.clicks().subscribe {
+            application.signOut()
+        }
     }
 }

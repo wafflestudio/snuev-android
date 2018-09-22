@@ -8,6 +8,7 @@ import com.wafflestudio.snuev.model.resource.User
 import com.wafflestudio.snuev.util.PREFERENCE
 import com.wafflestudio.snuev.util.PREFERENCE_AUTH_TOKEN_KEY
 import com.wafflestudio.snuev.util.PREFERENCE_USER_KEY
+import moe.banana.jsonapi2.Document
 import moe.banana.jsonapi2.ResourceAdapterFactory
 
 object SnuevPreference {
@@ -39,14 +40,22 @@ object SnuevPreference {
         get() {
             val moshi = moshi ?: return null
             val encoded = readString(PREFERENCE_USER_KEY) ?: return null
-            return moshi.adapter(User::class.java).fromJson(encoded)
+            val document = moshi.adapter(Document::class.java).fromJson(encoded)
+            return document?.asObjectDocument<User>()?.get()
         }
         set(value) {
             val moshi = moshi ?: return
             value?.let {
-                writeString(PREFERENCE_USER_KEY, moshi.adapter(User::class.java).toJson(it))
+                writeString(PREFERENCE_USER_KEY, moshi.adapter(Document::class.java).toJson(it.document))
             }
         }
+
+    fun clear() {
+        val sharedPreferences = sharedPreferences ?: return
+        val edit = sharedPreferences.edit()
+        edit.clear()
+        edit.apply()
+    }
 
     private fun readString(key: String): String? {
         val sharedPreferences = sharedPreferences ?: return null

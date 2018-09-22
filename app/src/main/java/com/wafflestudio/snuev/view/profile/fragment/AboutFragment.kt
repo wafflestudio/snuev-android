@@ -17,6 +17,7 @@ class AboutFragment : Fragment() {
         SnuevPreference.user?.let { user ->
             text_email.text = user.email
             text_nickname.text = user.nickname
+            text_department.text = user.getDepartment()?.name ?: ""
         }
     }
 
