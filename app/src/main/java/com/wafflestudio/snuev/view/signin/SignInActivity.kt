@@ -6,10 +6,15 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import com.jakewharton.rxbinding2.view.clicks
 import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ActivitySignInBinding
 import com.wafflestudio.snuev.view.base.BaseActivity
 import com.wafflestudio.snuev.view.main.MainActivity
+import com.wafflestudio.snuev.view.signup.SignUpActivity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.activity_sign_in.*
+import java.util.concurrent.TimeUnit
 
 class SignInActivity : BaseActivity() {
     companion object {
@@ -34,6 +39,7 @@ class SignInActivity : BaseActivity() {
         binding.viewmodel = viewModel
 
         createObservers()
+        setupEvents()
     }
 
     private fun createObservers() {
@@ -43,5 +49,14 @@ class SignInActivity : BaseActivity() {
                 finish()
             }
         })
+    }
+
+    private fun setupEvents() {
+        button_to_sign_up.clicks()
+                .throttleFirst(2, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+            SignUpActivity.startActivity(this)
+        }
     }
 }

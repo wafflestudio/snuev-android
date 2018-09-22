@@ -1,9 +1,7 @@
 package com.wafflestudio.snuev.network
 
-import com.wafflestudio.snuev.model.resource.Course
-import com.wafflestudio.snuev.model.resource.Evaluation
-import com.wafflestudio.snuev.model.resource.Lecture
-import com.wafflestudio.snuev.model.resource.User
+import com.wafflestudio.snuev.model.request.SignUpRequest
+import com.wafflestudio.snuev.model.resource.*
 import io.reactivex.Observable
 import moe.banana.jsonapi2.Document
 import retrofit2.http.*
@@ -17,6 +15,9 @@ interface SnuevEndpoint {
     @GET("v1/user")
     fun fetchUser(): Observable<User>
 
+    @POST("v1/user")
+    fun signUp(@Body body: SignUpRequest): Observable<Document>
+
     @GET("v1/evaluations/latest")
     fun fetchLatestEvaluations(): Observable<List<Evaluation>>
 
@@ -28,6 +29,9 @@ interface SnuevEndpoint {
 
     @GET("v1/evaluations/most_liked")
     fun fetchMostLikedEvaluations(): Observable<List<Evaluation>>
+
+    @GET("v1/departments")
+    fun fetchDepartments(): Observable<List<Department>>
 
     @GET("v1/courses/search")
     fun searchCourses(@Query("q") query: String): Observable<List<Course>>

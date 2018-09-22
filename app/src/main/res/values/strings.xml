@@ -8,6 +8,8 @@
     <string name="header_most_liked_evaluations">추천 강의평</string>
     <string name="header_evaluations">강의평</string>
     <string name="header_profile">%1$s 님</string>
+    <string name="header_sign_up">가입하기</string>
+    <string name="header_sign_up_complete">메일 전송 완료</string>
 
     <!-- criteria -->
     <string name="criteria_score">/총점</string>
@@ -33,16 +35,29 @@
     <string name="semester_winter">%1$d 겨울 계절</string>
 
     <!-- desc -->
+    <string name="desc_snuev_returns">진짜가 돌아왔다\n여기가 바로 그 리얼 서울대학교 강의평가 스누이브</string>
+    <string name="desc_only_my_snu">서울대학교 메일로 인증받은 분만 입장 가능</string>
     <string name="desc_no_search_result">키워드를 직접 입력하거나, 상세조건 검색을 통해 원하는 강의를 찾아보세요!</string>
     <string name="desc_no_evaluations">강의평이 아직 없습니다. 첫 강의평을 작성해보세요!</string>
+    <string name="desc_sign_up_complete">아래 마이스누 웹메일로 인증메일을 전송하였습니다. 메일을 확인해 인증링크를 클릭해 주세요.</string>
 
     <!-- button -->
     <string name="button_leave_review">강의평 쓰기</string>
     <string name="button_register">등록</string>
     <string name="button_change_password">변경하기</string>
+    <string name="button_sign_in">로그인</string>
+    <string name="button_sign_up">가입하기</string>
+    <string name="button_to_sign_up">가입하기</string>
+    <string name="button_to_find_password">비밀번호 찾기</string>
+    <string name="button_to_sign_in">로그인하기</string>
+    <string name="button_to_my_snu">mySNU 바로가기</string>
 
     <!-- hint -->
     <string name="hint_leave_review">강의평을 입력하세요.</string>
+    <string name="hint_my_snu_account">마이스누 계정</string>
+    <string name="hint_department">학과명 검색</string>
+    <string name="hint_nickname">별명</string>
+    <string name="hint_password">비밀번호</string>
 
     <!-- tabs -->
     <string name="tab_about">내 정보</string>
