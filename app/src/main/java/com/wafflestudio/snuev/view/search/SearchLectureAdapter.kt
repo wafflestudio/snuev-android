@@ -30,7 +30,7 @@ class SearchLectureAdapter(
     ) : BaseViewHolder<Lecture>(view) {
         private lateinit var lecture: Lecture
 
-        override fun bind(data: Lecture) {
+        override fun bind(data: Lecture, position: Int) {
             lecture = data
             view.text_lecture_name.text = lecture.name
             view.text_lecture_detail.text = context.getString(

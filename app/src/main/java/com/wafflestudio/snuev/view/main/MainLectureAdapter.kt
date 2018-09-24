@@ -25,7 +25,7 @@ class MainLectureAdapter(
     class LectureHolder(view: View) : BaseViewHolder<Lecture>(view) {
         private lateinit var lecture: Lecture
 
-        override fun bind(data: Lecture) {
+        override fun bind(data: Lecture, position: Int) {
             lecture = data
             view.text_lecture_evaluation_count.text = lecture.evaluationsCount.toString()
             view.text_lecture_name.text = lecture.name

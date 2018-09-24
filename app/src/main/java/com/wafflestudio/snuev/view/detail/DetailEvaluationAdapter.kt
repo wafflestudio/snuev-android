@@ -25,7 +25,7 @@ class DetailEvaluationAdapter(
     class EvaluationHolder(view: View) : BaseViewHolder<Evaluation>(view) {
         private lateinit var evaluation: Evaluation
 
-        override fun bind(data: Evaluation) {
+        override fun bind(data: Evaluation, position: Int) {
             evaluation = data
             view.text_score.text = context.getString(R.string.score_0_decimals, evaluation.score)
             view.text_easiness.text = context.getString(R.string.score_0_decimals, evaluation.easiness)

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     >
 
     <data>
@@ -30,48 +29,268 @@
                 >
 
                 <android.support.constraint.ConstraintLayout
-                    android:id="@+id/layout_no_search_result"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/layout_search_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     >
 
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:src="@drawable/img_search"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        />
-
-                    <TextView
-                        android:layout_width="0dp"
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/layout_no_search_result"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/desc_no_search_result"
-                        android:textAlignment="center"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        >
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:src="@drawable/img_search"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="@string/desc_no_search_result"
+                            android:textAlignment="center"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                            />
+                    </android.support.constraint.ConstraintLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_search_result_lectures"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         />
                 </android.support.constraint.ConstraintLayout>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/list_search_result_lectures"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginStart="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    />
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/layout_search_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:padding="28dp"
+                    android:visibility="gone"
+                    >
 
+                    <TextView
+                        android:id="@+id/textView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/header_search_filter"
+                        android:textColor="@color/black"
+                        android:textSize="24sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/button_reset_filter"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginStart="14dp"
+                        android:background="@color/transparent"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/btn_reset"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+                        app:layout_constraintStart_toEndOf="@+id/textView7"
+                        app:layout_constraintTop_toTopOf="@+id/textView7"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        style="@style/SearchFilterHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/filter_department"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView7"
+                        />
+
+                    <EditText
+                        android:id="@+id/edit_department"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_cornered_border_gray"
+                        android:inputType="textFilter"
+                        android:padding="11dp"
+                        android:text="@={viewmodel.departmentSearchQuery}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView8"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_selected_departments"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/edit_department"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        style="@style/SearchFilterHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:text="@string/filter_grade"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/list_selected_departments"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_filter_grade"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView9"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        style="@style/SearchFilterHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:text="@string/filter_credits"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/list_filter_grade"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_filter_credit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView10"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        style="@style/SearchFilterHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:text="@string/filter_type"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/list_filter_credit"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_filter_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView11"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        style="@style/SearchFilterHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:text="@string/filter_academic_basics"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/list_filter_type"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_filter_academic_basics"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView12"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        style="@style/SearchFilterHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:text="@string/filter_academic_world"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/list_filter_academic_basics"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_filter_academic_world"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView13"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        style="@style/SearchFilterHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:text="@string/filter_optional_cultural_studies"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/list_filter_academic_world"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_filter_optional_cultural_studies"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView14"
+                        />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/list_search_results_departments"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_border_gray"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/edit_department"
+                        />
+                </android.support.constraint.ConstraintLayout>
             </android.support.constraint.ConstraintLayout>
         </android.support.v4.widget.NestedScrollView>
 

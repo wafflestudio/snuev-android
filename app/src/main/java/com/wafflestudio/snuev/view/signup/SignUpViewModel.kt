@@ -10,13 +10,14 @@ import com.wafflestudio.snuev.model.resource.Department
 import com.wafflestudio.snuev.model.resource.User
 import com.wafflestudio.snuev.network.SnuevApi
 import com.wafflestudio.snuev.preference.SnuevPreference
+import com.wafflestudio.snuev.viewmodel.DepartmentViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import moe.banana.jsonapi2.Document
 
-class SignUpViewModel : ViewModel() {
-    private val disposables = CompositeDisposable()
+class SignUpViewModel : ViewModel(), DepartmentViewModel {
+    override val disposables = CompositeDisposable()
 
     init {
         fetchDepartments()
@@ -25,23 +26,14 @@ class SignUpViewModel : ViewModel() {
     val username = ObservableField<String>()
     val nickname = ObservableField<String>()
     val password = ObservableField<String>()
-
-    val departmentSearchQuery = ObservableField<String>()
-    val selectedDepartment = ObservableField<Department>()
-
     val user: MutableLiveData<User> = MutableLiveData()
-    val departments: MutableLiveData<List<Department>> = MutableLiveData()
-    val departmentSearchResult: MutableLiveData<List<Department>> = MutableLiveData()
 
-    fun searchDepartments() {
-        val searchQuery = departmentSearchQuery.get() ?: return
-        val departments = departments.value ?: return
-        departmentSearchResult.value = departments
-                .filter { department -> department.name.contains(searchQuery) }
-                .take(3)
-    }
+    override val departmentSearchQuery = ObservableField<String>()
+    private val selectedDepartment = ObservableField<Department>()
+    override val departments: MutableLiveData<List<Department>> = MutableLiveData()
+    override val departmentSearchResult: MutableLiveData<List<Department>> = MutableLiveData()
 
-    fun selectDepartment(department: Department) {
+    override fun selectDepartment(department: Department) {
         departmentSearchQuery.set(department.name)
         selectedDepartment.set(department)
     }
@@ -52,7 +44,7 @@ class SignUpViewModel : ViewModel() {
         val nickname = nickname.get() ?: return
         val password = password.get() ?: return
 
-        val disposable = SnuevApi.service.signUp(SignUpRequest(
+        disposables.add(SnuevApi.service.signUp(SignUpRequest(
                 username = username,
                 departmentId = departmentId,
                 nickname = nickname,
@@ -65,21 +57,7 @@ class SignUpViewModel : ViewModel() {
                 .subscribe(
                         { onSignUpSuccess(it) },
                         { onSignUpFailure(it) }
-                )
-        disposables.add(disposable)
-    }
-
-    private fun fetchDepartments() {
-        val disposable = SnuevApi.service.fetchDepartments()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { onFetchDepartmentsRequest() }
-                .doOnTerminate { onFetchDepartmentsFinish() }
-                .subscribe(
-                        { onFetchDepartmentsSuccess(it) },
-                        { onFetchDepartmentFailure(it) }
-                )
-        disposables.add(disposable)
+                ))
     }
 
     private fun fetchUser() {
@@ -108,13 +86,6 @@ class SignUpViewModel : ViewModel() {
         error.printStackTrace()
     }
 
-    private fun onFetchDepartmentsRequest() {}
-    private fun onFetchDepartmentsFinish() {}
-    private fun onFetchDepartmentsSuccess(response: List<Department>) {
-        departments.value = response
-        departmentSearchResult.value = response.take(3)
-    }
-
     private fun onFetchUserRequest() {}
     private fun onFetchUserFinish() {}
     private fun onFetchUserSuccess(response: User) {
@@ -122,9 +93,7 @@ class SignUpViewModel : ViewModel() {
         user.value = response
     }
 
-    private fun onFetchUserFailure(error: Throwable) {}
-
-    private fun onFetchDepartmentFailure(error: Throwable) {
+    private fun onFetchUserFailure(error: Throwable) {
         error.printStackTrace()
     }
 

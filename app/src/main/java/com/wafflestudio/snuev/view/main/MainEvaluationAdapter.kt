@@ -26,7 +26,7 @@ class MainEvaluationAdapter(
     class EvaluationHolder(view: View) : BaseViewHolder<Evaluation>(view) {
         private lateinit var evaluation: Evaluation
 
-        override fun bind(data: Evaluation) {
+        override fun bind(data: Evaluation, position: Int) {
             evaluation = data
             view.text_lecture_name.text = evaluation.getLecture()?.name ?: ""
             view.text_semester.text = evaluation.getSemester()?.toString(context) ?: ""

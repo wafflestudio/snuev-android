@@ -10,6 +10,7 @@
     <string name="header_profile">%1$s 님</string>
     <string name="header_sign_up">가입하기</string>
     <string name="header_sign_up_complete">메일 전송 완료</string>
+    <string name="header_search_filter">상세조건 설정</string>
 
     <!-- criteria -->
     <string name="criteria_score">/총점</string>
@@ -20,6 +21,62 @@
     <string name="criteria_no_slash_grading">학점 잘 줌</string>
     <string name="criteria_easiness_hard">어려움</string>
     <string name="criteria_easiness_easy">쉬움</string>
+
+    <!-- filter -->
+    <string name="filter_department">학과명</string>
+    <string name="filter_grade">학년</string>
+    <string name="filter_credits">학점</string>
+    <string name="filter_type">구분</string>
+    <string name="filter_academic_basics">학문의 기초</string>
+    <string name="filter_academic_world">학문의 세계</string>
+    <string name="filter_optional_cultural_studies">선택교양</string>
+
+    <!-- grade filter -->
+    <string name="filter_grade_1">1학년</string>
+    <string name="filter_grade_2">2학년</string>
+    <string name="filter_grade_3">3학년</string>
+    <string name="filter_grade_4">4학년</string>
+    <string name="filter_grade_5">5학년</string>
+    <string name="filter_grade_master">석사</string>
+    <string name="filter_grade_doctor">박사</string>
+    <string name="filter_grade_both">석박사통합</string>
+
+    <!-- credit filter -->
+    <string name="filter_credit_1">1학점</string>
+    <string name="filter_credit_2">2학점</string>
+    <string name="filter_credit_3">3학점</string>
+    <string name="filter_credit_4">4학점</string>
+
+    <!-- type filter -->
+    <string name="filter_type_cultural">교양</string>
+    <string name="filter_type_paper">논문</string>
+    <string name="filter_type_graduate">대학원</string>
+    <string name="filter_type_select">일선</string>
+    <string name="filter_type_major_select">전선</string>
+    <string name="filter_type_major">전필</string>
+
+    <!-- academic basics filter -->
+    <string name="filter_academic_basic_thought">사고와 표현</string>
+    <string name="filter_academic_basic_foreign_language">외국어</string>
+    <string name="filter_academic_basic_analysis">수량적 분석과 추론</string>
+    <string name="filter_academic_basic_experimental">과학적 사고와 실험</string>
+    <string name="filter_academic_basic_computer">컴퓨터와 정보 활용</string>
+
+    <!-- academic world filter -->
+    <string name="filter_academic_world_culture">언어와 문화</string>
+    <string name="filter_academic_world_art">문화와 예술</string>
+    <string name="filter_academic_world_philosophy">역사와 철학</string>
+    <string name="filter_academic_world_politics_economics">정치와 경제</string>
+    <string name="filter_academic_world_social">인간과 사회</string>
+    <string name="filter_academic_world_nature">자연과 기술</string>
+    <string name="filter_academic_world_life">생명과 환경</string>
+
+    <!-- optional cultural studies filters -->
+    <string name="filter_cultural_studies_pe">체육</string>
+    <string name="filter_cultural_studies_art">예술실기</string>
+    <string name="filter_cultural_studies_leadership">대학과 리더십</string>
+    <string name="filter_cultural_studies_creativity">창의와 융합</string>
+    <string name="filter_cultural_studies_korea">한국의 이해</string>
 
     <!-- score -->
     <string name="score_0_decimals">%.0f</string>

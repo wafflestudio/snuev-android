@@ -7,5 +7,5 @@ import android.view.View
 abstract class BaseViewHolder<T>(protected val view: View) : RecyclerView.ViewHolder(view) {
     protected val context: Context
     get() = view.context
-    abstract fun bind(data: T)
+    abstract fun bind(data: T, position: Int)
 }
