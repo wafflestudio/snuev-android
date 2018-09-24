@@ -36,6 +36,8 @@ class SearchActivity : BaseActivity() {
     private lateinit var viewModel: SearchViewModel
     private lateinit var binding: ActivitySearchBinding
 
+    private var searchLectureAdapter: SearchLectureAdapter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,6 +48,11 @@ class SearchActivity : BaseActivity() {
         createObservers()
         setupEvents()
         setupRecyclerViews()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        searchLectureAdapter?.itemsClickable = true
     }
 
     private fun createObservers() {
@@ -77,11 +84,13 @@ class SearchActivity : BaseActivity() {
 
     private fun setupRecyclerViews() {
         list_search_result_lectures.layoutManager = LinearLayoutManager(this)
-        list_search_result_lectures.adapter = SearchLectureAdapter(this, viewModel.searchResultLectures) { lecture ->
+        searchLectureAdapter = SearchLectureAdapter(this, viewModel.searchResultLectures) { lecture ->
             lecture.id?.let { lectureId ->
+                searchLectureAdapter?.itemsClickable = false
                 DetailActivity.startActivity(this, lectureId)
             }
         }
+        list_search_result_lectures.adapter = searchLectureAdapter
 
         list_search_results_departments.layoutManager = LinearLayoutManager(this)
         list_search_results_departments.adapter = DepartmentAdapter(this, viewModel.departmentSearchResult) { department ->

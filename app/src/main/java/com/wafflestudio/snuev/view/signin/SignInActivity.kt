@@ -42,6 +42,11 @@ class SignInActivity : BaseActivity() {
         setupEvents()
     }
 
+    override fun onResume() {
+        super.onResume()
+        button_to_sign_up.isEnabled = true
+    }
+
     private fun createObservers() {
         viewModel.user.observe(this, Observer { user ->
             user?.let {
@@ -52,10 +57,8 @@ class SignInActivity : BaseActivity() {
     }
 
     private fun setupEvents() {
-        button_to_sign_up.clicks()
-                .throttleFirst(2, TimeUnit.SECONDS, AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
+        button_to_sign_up.clicks().subscribe {
+            button_to_sign_up.isEnabled = false
             SignUpActivity.startActivity(this)
         }
     }

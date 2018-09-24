@@ -21,11 +21,14 @@ class SearchLectureAdapter(
         val view = LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.item_search_lecture, parent, false)
-        return LectureHolder(view, onItemClick)
+        return LectureHolder(view, this, onItemClick)
     }
+
+    var itemsClickable = true
 
     class LectureHolder(
             view: View,
+            val adapter: SearchLectureAdapter,
             private val onItemClick: (Lecture) -> Unit
     ) : BaseViewHolder<Lecture>(view) {
         private lateinit var lecture: Lecture
@@ -43,7 +46,11 @@ class SearchLectureAdapter(
             view.text_lecture_evaluation_count.text = lecture.evaluationsCount.toString()
             view.text_lecture_score.text = context.getString(R.string.score_1_decimals, lecture.score)
 
-            view.clicks().subscribe { onItemClick(data) }
+            view.clicks().subscribe {
+                if (adapter.itemsClickable) {
+                    onItemClick(data)
+                }
+            }
         }
     }
 }

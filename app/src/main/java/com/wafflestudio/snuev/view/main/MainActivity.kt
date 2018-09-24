@@ -10,6 +10,7 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ActivityMainBinding
 import com.wafflestudio.snuev.view.base.BaseActivity
+import com.wafflestudio.snuev.view.detail.DetailActivity
 import com.wafflestudio.snuev.view.profile.ProfileActivity
 import com.wafflestudio.snuev.view.search.SearchActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -29,6 +30,11 @@ class MainActivity : BaseActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
 
+    private var latestEvaluationAdapter: MainEvaluationAdapter? = null
+    private var mostEvaluatedLectureAdapter: MainLectureAdapter? = null
+    private var topRatedLectureAdapter: MainLectureAdapter? = null
+    private var mostLikedEvaluationAdapter: MainEvaluationAdapter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,6 +48,12 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+        button_search.isEnabled = true
+        button_profile.isEnabled = true
+        latestEvaluationAdapter?.itemsClickable = true
+        mostEvaluatedLectureAdapter?.itemsClickable = true
+        topRatedLectureAdapter?.itemsClickable = true
+        mostLikedEvaluationAdapter?.itemsClickable = true
         viewModel.fetchLatestEvaluations()
         viewModel.fetchMostEvaluatedLectures()
         viewModel.fetchTopRatedLectures()
@@ -49,18 +61,51 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupEvents() {
-        button_search.clicks().subscribe { SearchActivity.startActivity(this) }
-        button_profile.clicks().subscribe { ProfileActivity.startActivity(this) }
+        button_search.clicks().subscribe {
+            button_search.isEnabled = false
+            SearchActivity.startActivity(this)
+        }
+        button_profile.clicks().subscribe {
+            button_profile.isEnabled = false
+            ProfileActivity.startActivity(this)
+        }
     }
 
     private fun setupRecyclerViews() {
         list_latest_evaluations.layoutManager = LinearLayoutManager(this)
-        list_latest_evaluations.adapter = MainEvaluationAdapter(this, viewModel.latestEvaluations)
+        latestEvaluationAdapter = MainEvaluationAdapter(this, viewModel.latestEvaluations) { evaluation ->
+            evaluation.getLecture()?.id?.let { id ->
+                latestEvaluationAdapter?.itemsClickable = false
+                DetailActivity.startActivity(this, id)
+            }
+        }
+        list_latest_evaluations.adapter = latestEvaluationAdapter
+
         list_most_evaluated_lectures.layoutManager = LinearLayoutManager(this)
-        list_most_evaluated_lectures.adapter = MainLectureAdapter(this, viewModel.mostEvaluatedLectures)
+        mostEvaluatedLectureAdapter = MainLectureAdapter(this, viewModel.mostEvaluatedLectures) { lecture ->
+            lecture.id?.let { id ->
+                mostEvaluatedLectureAdapter?.itemsClickable = false
+                DetailActivity.startActivity(this, id)
+            }
+        }
+        list_most_evaluated_lectures.adapter = mostEvaluatedLectureAdapter
+
         list_top_rated_lectures.layoutManager = LinearLayoutManager(this)
-        list_top_rated_lectures.adapter = MainLectureAdapter(this, viewModel.topRatedLectures)
+        topRatedLectureAdapter = MainLectureAdapter(this, viewModel.topRatedLectures) { lecture ->
+            lecture.id?.let { id ->
+                topRatedLectureAdapter?.itemsClickable = false
+                DetailActivity.startActivity(this, id)
+            }
+        }
+        list_top_rated_lectures.adapter = topRatedLectureAdapter
+
         list_most_liked_evaluations.layoutManager = LinearLayoutManager(this)
-        list_most_liked_evaluations.adapter = MainEvaluationAdapter(this, viewModel.mostLikedEvaluations)
+        mostLikedEvaluationAdapter = MainEvaluationAdapter(this, viewModel.mostLikedEvaluations) { evaluation ->
+            evaluation.getLecture()?.id?.let { id ->
+                mostLikedEvaluationAdapter?.itemsClickable = false
+                DetailActivity.startActivity(this, id)
+            }
+        }
+        list_most_liked_evaluations.adapter = mostLikedEvaluationAdapter
     }
 }

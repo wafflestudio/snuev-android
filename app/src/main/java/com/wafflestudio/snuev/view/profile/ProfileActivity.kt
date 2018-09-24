@@ -38,6 +38,11 @@ class ProfileActivity : BaseActivity() {
         setupEvents()
     }
 
+    override fun onResume() {
+        super.onResume()
+        btn_sign_out.isEnabled = true
+    }
+
     private fun setupPager() {
         view_pager.adapter = ProfilePagerAdapter(this, supportFragmentManager)
         tab_layout.setupWithViewPager(view_pager)
@@ -49,6 +54,7 @@ class ProfileActivity : BaseActivity() {
 
     private fun setupEvents() {
         btn_sign_out.clicks().subscribe {
+            btn_sign_out.isEnabled = false
             application.signOut()
         }
     }
