@@ -22,7 +22,7 @@ object SnuevApi {
         this.application = application
     }
 
-    val service by lazy {
+    val service: SnuevEndpoint by lazy {
         val jsonAdapterFactory = ResourceAdapterFactory.builder()
                 .add(Course::class.java)
                 .add(Department::class.java)
@@ -48,7 +48,9 @@ object SnuevApi {
 
                     val response = chain.proceed(builder.build())
                     if (response.code() == HttpsURLConnection.HTTP_UNAUTHORIZED) {
-                        application?.signOut()
+                        if (SnuevPreference.token != null) {
+                            application?.signOut()
+                        }
                     }
                     response
                 }
