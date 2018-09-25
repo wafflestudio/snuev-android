@@ -7,10 +7,10 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.view.View
 import com.jakewharton.rxbinding2.view.clicks
 import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ActivityDetailBinding
+import com.wafflestudio.snuev.extension.visible
 import com.wafflestudio.snuev.view.base.BaseActivity
 import com.wafflestudio.snuev.view.evaluate.EvaluateActivity
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -31,7 +31,7 @@ class DetailActivity : BaseActivity() {
     private lateinit var viewModel: DetailViewModel
     private lateinit var binding: ActivityDetailBinding
     private val lectureId: Int
-    get() = intent.getIntExtra(EXTRA_LECTURE, 0)
+        get() = intent.getIntExtra(EXTRA_LECTURE, 0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,13 +54,9 @@ class DetailActivity : BaseActivity() {
 
     private fun createObservables() {
         viewModel.evaluations.observe(this, Observer {
-            layout_no_evaluations.visibility = if (it?.isNotEmpty() == true) {
-                View.INVISIBLE
-            } else {
-                View.VISIBLE
-            }
+            layout_no_evaluations.visible = it?.isEmpty() == true
         })
-   }
+    }
 
     private fun setupEvents() {
         button_leave_review.clicks().subscribe {
@@ -72,6 +68,6 @@ class DetailActivity : BaseActivity() {
 
     private fun setupRecyclerViews() {
         list_evaluations.layoutManager = LinearLayoutManager(this)
-        list_evaluations.adapter = DetailEvaluationAdapter(this, viewModel.evaluations)
+        list_evaluations.adapter = DetailEvaluationAdapter(this, viewModel.evaluations, lectureId.toString())
     }
 }

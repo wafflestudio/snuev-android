@@ -47,4 +47,11 @@ interface SnuevEndpoint {
 
     @POST("v1/lectures/{lecture_id}/evaluations")
     fun createEvaluation(@Path("lecture_id") lectureId: String, @Body body: Evaluation): Observable<Evaluation>
+
+    @POST("/v1/lectures/{lecture_id}/evaluations/{evaluation_id}/vote")
+    fun vote(
+            @Path("lecture_id") lectureId: String,
+            @Path("evaluation_id") evaluationId: String,
+            @Query("vote[direction]") isUpVote: Boolean
+    ) : Observable<Document>
 }

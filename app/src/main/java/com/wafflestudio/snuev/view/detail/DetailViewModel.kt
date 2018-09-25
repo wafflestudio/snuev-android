@@ -21,7 +21,7 @@ class DetailViewModel : ViewModel() {
     val evaluations: MutableLiveData<List<Evaluation>> = MutableLiveData()
 
     fun fetchLecture(id: String) {
-        val disposable = SnuevApi.service.fetchLecture(id)
+        disposables.add(SnuevApi.service.fetchLecture(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchLectureRequest() }
@@ -29,12 +29,11 @@ class DetailViewModel : ViewModel() {
                 .subscribe(
                         { onFetchLectureSuccess(it) },
                         { onFetchLectureFailure(it) }
-                )
-        disposables.add(disposable)
+                ))
     }
 
     fun fetchLectureEvaluations(id: String, page: Int) {
-        val disposable = SnuevApi.service.fetchLectureEvaluations(id, page)
+        disposables.add(SnuevApi.service.fetchLectureEvaluations(id, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchLectureEvaluationsRequest() }
@@ -42,8 +41,7 @@ class DetailViewModel : ViewModel() {
                 .subscribe(
                         { onFetchLectureEvaluationsSuccess(it) },
                         { onFetchLectureEvaluationsFailure(it) }
-                )
-        disposables.add(disposable)
+                ))
     }
 
     private fun onFetchLectureRequest() {}

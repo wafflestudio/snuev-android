@@ -27,7 +27,7 @@ class SearchFilterAdapter(
 
     class FilterHolder(
             view: View,
-            val adapter: SearchFilterAdapter
+            private val adapter: SearchFilterAdapter
     ) : BaseViewHolder<Filter>(view) {
         override fun bind(data: Filter, position: Int) {
             view.layout_item.background = if (data.selected) {
