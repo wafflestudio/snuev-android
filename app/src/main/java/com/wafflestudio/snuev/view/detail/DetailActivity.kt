@@ -21,7 +21,7 @@ class DetailActivity : BaseActivity() {
         const val REQUEST_CODE = 4
         const val EXTRA_LECTURE = "$TAG/LECTURE"
 
-        fun startActivity(activity: Activity, lectureId: Int) {
+        fun startActivity(activity: Activity, lectureId: String) {
             val intent = Intent(activity, DetailActivity::class.java)
             intent.putExtra(EXTRA_LECTURE, lectureId)
             activity.startActivityForResult(intent, REQUEST_CODE)
@@ -30,8 +30,8 @@ class DetailActivity : BaseActivity() {
 
     private lateinit var viewModel: DetailViewModel
     private lateinit var binding: ActivityDetailBinding
-    private val lectureId: Int
-        get() = intent.getIntExtra(EXTRA_LECTURE, 0)
+    private val lectureId: String
+        get() = intent.getStringExtra(EXTRA_LECTURE) ?: ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,8 +48,8 @@ class DetailActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchLecture(lectureId.toString())
-        viewModel.fetchLectureEvaluations(lectureId.toString(), 0)
+        viewModel.fetchLecture(lectureId)
+        viewModel.fetchLectureEvaluations(lectureId, 0)
     }
 
     private fun createObservables() {

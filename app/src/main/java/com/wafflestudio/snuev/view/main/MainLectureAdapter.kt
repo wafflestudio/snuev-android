@@ -35,7 +35,7 @@ class MainLectureAdapter(
 
         override fun bind(data: Lecture, position: Int) {
             lecture = data
-            view.text_lecture_evaluation_count.text = lecture.evaluationsCount.toString()
+            view.text_lecture_evaluation_count.text = lecture.evaluationCount.toString()
             view.text_lecture_name.text = lecture.name
             view.text_lecture_detail.text = context.getString(
                     R.string.lecture_details,

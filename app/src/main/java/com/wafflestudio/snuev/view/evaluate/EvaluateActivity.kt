@@ -18,7 +18,7 @@ class EvaluateActivity : BaseActivity() {
         const val EXTRA_LECTURE_ID = "$TAG/LECTURE_ID"
         const val EXTRA_LECTURE_NAME = "$TAG/LECTURE_NAME"
 
-        fun startActivity(activity: Activity, lectureId: Int, lectureName: String) {
+        fun startActivity(activity: Activity, lectureId: String, lectureName: String) {
             val intent = Intent(activity, EvaluateActivity::class.java)
             intent.putExtra(EXTRA_LECTURE_ID, lectureId)
             intent.putExtra(EXTRA_LECTURE_NAME, lectureName)
@@ -29,8 +29,8 @@ class EvaluateActivity : BaseActivity() {
     private lateinit var viewModel: EvaluateViewModel
     private lateinit var binding: ActivityEvaluateBinding
 
-    private val lectureId: Int
-    get() = intent.getIntExtra(EXTRA_LECTURE_ID, 0)
+    private val lectureId: String
+    get() = intent.getStringExtra(EXTRA_LECTURE_ID) ?: ""
     private val lectureName: String
     get() = intent.getStringExtra(EXTRA_LECTURE_NAME)
 

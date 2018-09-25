@@ -37,10 +37,10 @@ class DetailEvaluationItemViewModel(lifecycleOwner: LifecycleOwner) {
     var evaluation: Evaluation? = null
         set(value) {
             value?.let {
-                upVoted.set(it.upvoted)
-                downVoted.set(it.downvoted)
-                upVoteCount.set(it.upvotesCount)
-                downVoteCount.set(it.downvotesCount)
+                upVoted.set(it.upVoted)
+                downVoted.set(it.downVoted)
+                upVoteCount.set(it.upVotesCount)
+                downVoteCount.set(it.downVotesCount)
             }
         }
 
@@ -114,5 +114,6 @@ class DetailEvaluationItemViewModel(lifecycleOwner: LifecycleOwner) {
             }
             downVoted.set(downVoted.get() == false)
         }
+        error.printStackTrace()
     }
 }

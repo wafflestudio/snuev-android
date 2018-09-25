@@ -1,14 +1,18 @@
 package com.wafflestudio.snuev.model.resource
 
 import android.content.Context
+import com.squareup.moshi.Json
 import com.wafflestudio.snuev.R
 import moe.banana.jsonapi2.JsonApi
 import moe.banana.jsonapi2.Resource
 
 @JsonApi(type = "semesters")
 class Semester : Resource() {
+    @field:Json(name = "year")
     val year: Int = 0
+    @field:Json(name = "season")
     private val season: String = ""
+
     fun getSeason(): Season {
         return when (season) {
             Season.SPRING.value -> Season.SPRING

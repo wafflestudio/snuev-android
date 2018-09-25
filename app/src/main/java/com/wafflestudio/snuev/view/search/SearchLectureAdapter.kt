@@ -43,7 +43,7 @@ class SearchLectureAdapter(
                     lecture.getProfessor()?.name ?: ""
             )
             view.text_lecture_view_count.text = lecture.viewCount.toString()
-            view.text_lecture_evaluation_count.text = lecture.evaluationsCount.toString()
+            view.text_lecture_evaluation_count.text = lecture.evaluationCount.toString()
             view.text_lecture_score.text = context.getString(R.string.score_1_decimals, lecture.score)
 
             view.clicks().subscribe {

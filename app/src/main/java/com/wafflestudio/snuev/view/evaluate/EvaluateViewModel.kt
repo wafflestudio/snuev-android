@@ -20,14 +20,14 @@ class EvaluateViewModel : ViewModel() {
     val success = MutableLiveData<Boolean>().default(false)
     val isLoading = MutableLiveData<Boolean>().default(false)
 
-    fun createEvaluation(lectureId: Int) {
+    fun createEvaluation(lectureId: String) {
         val evaluation = Evaluation()
         evaluation.score = (score.value ?: 0).toFloat()
         evaluation.easiness = (easiness.value ?: 0).toFloat()
         evaluation.grading = (grading.value ?: 0).toFloat()
         evaluation.comment = comment.value ?: ""
         val disposable = SnuevApi.service.createEvaluation(
-                lectureId.toString(),
+                lectureId,
                 evaluation
         )
                 .subscribeOn(Schedulers.io())
