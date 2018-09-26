@@ -21,10 +21,6 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="60dp"
-            android:paddingStart="60dp"
-            android:paddingRight="60dp"
-            android:paddingEnd="60dp"
             >
 
             <ImageView
@@ -44,6 +40,10 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:paddingEnd="60dp"
+                android:paddingLeft="60dp"
+                android:paddingRight="60dp"
+                android:paddingStart="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
                     android:id="@+id/imageView4"
                     android:layout_width="108dp"
                     android:layout_height="108dp"
-                    android:layout_marginTop="80dp"
+                    android:layout_marginTop="60dp"
                     android:src="@drawable/img_signup"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -75,104 +75,145 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView4"
                     />
 
-                <EditText
-                    android:id="@+id/edit_email"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edit_layout_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:hint="@string/hint_my_snu_account"
-                    android:inputType="textEmailAddress"
-                    android:text="@={viewmodel.username}"
-                    android:textSize="16sp"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/field_error"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView3"
-                    />
+                    >
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edit_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_my_snu_account"
+                        android:inputType="textEmailAddress"
+                        android:onTextChanged="@{() -> viewmodel.clearUsernameError()}"
+                        android:text="@={viewmodel.username}"
+                        android:textSize="16sp"
+                        />
+                </android.support.design.widget.TextInputLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="3dp"
                     android:layout_marginRight="3dp"
+                    android:layout_marginTop="20dp"
                     android:text="@string/hint_my_snu_domain"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/edit_email"
-                    app:layout_constraintEnd_toEndOf="@+id/edit_email"
-                    app:layout_constraintTop_toTopOf="@+id/edit_email"
+                    app:layout_constraintEnd_toEndOf="@+id/edit_layout_email"
+                    app:layout_constraintTop_toTopOf="@+id/edit_layout_email"
                     />
 
-                <EditText
-                    android:id="@+id/edit_department"
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/text_email_desc"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginRight="0dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="20dp"
-                    android:afterTextChanged="@{(view) -> viewmodel.searchDepartments()}"
-                    android:hint="@string/hint_department"
-                    android:inputType="textFilter"
-                    android:text="@={viewmodel.departmentSearchQuery}"
-                    android:textSize="16sp"
+                    android:text="@string/desc_same_as_my_snu"
+                    android:textColor="@color/black_40"
+                    android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_email"
+                    app:layout_constraintTop_toBottomOf="@id/edit_layout_email"
                     />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edit_layout_department"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/field_error"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_email_desc"
+                    >
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edit_department"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:afterTextChanged="@{(view) -> viewmodel.searchDepartments()}"
+                        android:hint="@string/hint_department"
+                        android:inputType="textFilter"
+                        android:onTextChanged="@{() -> viewmodel.clearDepartmentError()}"
+                        android:text="@={viewmodel.departmentSearchQuery}"
+                        android:textSize="16sp"
+                        />
+                </android.support.design.widget.TextInputLayout>
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginBottom="22dp"
                     android:background="@color/transparent"
                     android:src="@drawable/ic_search"
-                    app:layout_constraintBottom_toTopOf="@+id/list_departments"
-                    app:layout_constraintEnd_toEndOf="@+id/edit_department"
-                    app:layout_constraintTop_toTopOf="@+id/edit_department"
+                    app:layout_constraintBottom_toBottomOf="@+id/edit_layout_department"
+                    app:layout_constraintEnd_toEndOf="@+id/edit_layout_department"
+                    app:layout_constraintTop_toTopOf="@+id/edit_layout_department"
                     />
 
-                <EditText
-                    android:id="@+id/edit_nickname"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edit_layout_nickname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="60dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginRight="60dp"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="20dp"
-                    android:hint="@string/hint_nickname"
-                    android:inputType="textPersonName"
-                    android:text="@={viewmodel.nickname}"
-                    android:textSize="16sp"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/field_error"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_department"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/edit_layout_department"
+                    >
 
-                <EditText
-                    android:id="@+id/edit_password"
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edit_nickname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_nickname"
+                        android:inputType="textPersonName"
+                        android:onTextChanged="@{() -> viewmodel.clearNicknameError()}"
+                        android:text="@={viewmodel.nickname}"
+                        android:textSize="16sp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/edit_layout_password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:hint="@string/hint_password"
-                    android:inputType="textPassword"
-                    android:text="@={viewmodel.password}"
-                    android:textSize="16sp"
+                    app:errorEnabled="true"
+                    app:errorTextAppearance="@style/field_error"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_nickname"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/edit_layout_nickname"
+                    >
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/edit_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:hint="@string/hint_password"
+                        android:inputType="textPassword"
+                        android:onTextChanged="@{() -> viewmodel.clearPasswordError()}"
+                        android:text="@={viewmodel.password}"
+                        android:textSize="16sp"
+                        />
+                </android.support.design.widget.TextInputLayout>
 
                 <Button
                     android:id="@+id/button_sign_up"
                     style="@style/PrimaryButton"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
                     android:onClick="@{(view) -> viewmodel.signUp()}"
                     android:text="@string/button_sign_up"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_password"
+                    app:layout_constraintTop_toBottomOf="@+id/edit_layout_password"
                     />
 
                 <Button
@@ -194,10 +235,12 @@
                     android:id="@+id/list_departments"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="55dp"
                     android:background="@drawable/bg_border_gray"
-                    app:layout_constraintEnd_toEndOf="@+id/edit_department"
-                    app:layout_constraintStart_toStartOf="@+id/edit_department"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_department"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/edit_layout_department"
+                    app:layout_constraintStart_toStartOf="@+id/edit_layout_department"
+                    app:layout_constraintTop_toTopOf="@+id/edit_layout_department"
                     />
             </android.support.constraint.ConstraintLayout>
 

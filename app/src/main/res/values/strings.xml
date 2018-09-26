@@ -94,6 +94,7 @@
     <!-- desc -->
     <string name="desc_snuev_returns">진짜가 돌아왔다\n여기가 바로 그 리얼 서울대학교 강의평가 스누이브</string>
     <string name="desc_only_my_snu">서울대학교 메일로 인증받은 분만 입장 가능</string>
+    <string name="desc_same_as_my_snu">서울대학교 이메일 인증이 필요하므로 마이스누 계정과 동일하게 입력해주세요.</string>
     <string name="desc_no_search_result">키워드를 직접 입력하거나, 상세조건 검색을 통해 원하는 강의를 찾아보세요!</string>
     <string name="desc_no_evaluations">강의평이 아직 없습니다. 첫 강의평을 작성해보세요!</string>
     <string name="desc_sign_up_complete">아래 마이스누 웹메일로 인증메일을 전송하였습니다. 메일을 확인해 인증링크를 클릭해 주세요.</string>
@@ -134,6 +135,9 @@
     <string name="error_network">네트워크 연결 오류가 발생했습니다</string>
     <string name="error_username_empty">마이스누 계정을 입력해주세요</string>
     <string name="error_password_empty">비밀번호를 입력해주세요</string>
+    <string name="error_department_empty">전공을 정해주세요</string>
+    <string name="error_nickname_empty">별명을 입력해주세요</string>
     <string name="error_invalid_credentials">마이스누 계정 혹은 비밀번호를 잘못 입력했습니다</string>
+    <string name="error_account_exists">계정이 이미 존재합니다</string>
     <string name="error_password_too_short">비밀번호가 너무 짧아요 ㅠㅠ</string>
 </resources>

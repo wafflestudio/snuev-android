@@ -4,6 +4,7 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import com.squareup.moshi.Moshi
+import com.wafflestudio.snuev.extension.errorTitles
 import com.wafflestudio.snuev.model.meta.AuthTokenMeta
 import com.wafflestudio.snuev.model.request.SignUpRequest
 import com.wafflestudio.snuev.model.resource.Department
@@ -26,6 +27,35 @@ class SignUpViewModel : ViewModel(), DepartmentViewModel {
     val username = ObservableField<String>()
     val nickname = ObservableField<String>()
     val password = ObservableField<String>()
+
+    // errors
+    val usernameFieldEmpty = MutableLiveData<Boolean>()
+    val accountExists = MutableLiveData<Boolean>()
+    val departmentFieldEmpty = MutableLiveData<Boolean>()
+    val nicknameFieldEmpty = MutableLiveData<Boolean>()
+    val passwordFieldEmpty = MutableLiveData<Boolean>()
+    val passwordTooShort = MutableLiveData<Boolean>()
+
+    fun clearUsernameError() {
+        usernameFieldEmpty.value = false
+        accountExists.value = false
+    }
+
+    fun clearDepartmentError() {
+        departmentFieldEmpty.value = false
+    }
+
+    fun clearNicknameError() {
+        nicknameFieldEmpty.value = false
+    }
+
+    fun clearPasswordError() {
+        passwordFieldEmpty.value = false
+        passwordTooShort.value = false
+    }
+
+    val isFetching = ObservableField<Boolean>(false)
+
     val user: MutableLiveData<User> = MutableLiveData()
 
     override val departmentSearchQuery = ObservableField<String>()
@@ -39,10 +69,44 @@ class SignUpViewModel : ViewModel(), DepartmentViewModel {
     }
 
     fun signUp() {
-        val username = username.get() ?: return
-        val departmentId = selectedDepartment.get()?.id ?: return
-        val nickname = nickname.get() ?: return
-        val password = password.get() ?: return
+        var isValid = true
+
+        val username = username.get()
+        val departmentId = selectedDepartment.get()?.id
+        val nickname = nickname.get()
+        val password = password.get()
+
+        if (username.isNullOrBlank()) {
+            isValid = false
+            usernameFieldEmpty.value = true
+        }
+
+        if (departmentId.isNullOrBlank()) {
+            isValid = false
+            departmentFieldEmpty.value = true
+        }
+
+        if (nickname.isNullOrBlank()) {
+            isValid = false
+            nicknameFieldEmpty.value = true
+        }
+
+        if (password.isNullOrBlank()) {
+            isValid = false
+            passwordFieldEmpty.value = true
+        } else if (password != null && password.length < 8) {
+            isValid = false
+            passwordTooShort.value = true
+        }
+
+        if (!isValid) {
+            return
+        }
+
+        username ?: return
+        departmentId ?: return
+        nickname ?: return
+        password ?: return
 
         disposables.add(SnuevApi.service.signUp(SignUpRequest(
                 username = username,
@@ -53,27 +117,26 @@ class SignUpViewModel : ViewModel(), DepartmentViewModel {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onSignUpRequest() }
-                .doOnTerminate { onSignUpFinish() }
                 .subscribe(
                         { onSignUpSuccess(it) },
                         { onSignUpFailure(it) }
-                ))
+                )
+        )
     }
 
     private fun fetchUser() {
         disposables.add(SnuevApi.service.fetchUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { onFetchUserRequest() }
                 .doOnTerminate { onFetchUserFinish() }
-                .subscribe(
-                        { onFetchUserSuccess(it) },
-                        { onFetchUserFailure(it) }
-                ))
+                .subscribe { onFetchUserSuccess(it) }
+        )
     }
 
-    private fun onSignUpRequest() {}
-    private fun onSignUpFinish() {}
+    private fun onSignUpRequest() {
+        isFetching.set(true)
+    }
+
     private fun onSignUpSuccess(response: Document) {
         val moshi = Moshi.Builder().build()
         val jsonAdapter = moshi.adapter(AuthTokenMeta::class.java)
@@ -83,11 +146,15 @@ class SignUpViewModel : ViewModel(), DepartmentViewModel {
     }
 
     private fun onSignUpFailure(error: Throwable) {
-        error.printStackTrace()
+        isFetching.set(false)
+        if (error.errorTitles().contains("User already exists")) {
+            accountExists.value = true
+        }
     }
 
-    private fun onFetchUserRequest() {}
-    private fun onFetchUserFinish() {}
+    private fun onFetchUserFinish() {
+        isFetching.set(false)
+    }
     private fun onFetchUserSuccess(response: User) {
         SnuevPreference.user = response
         user.value = response

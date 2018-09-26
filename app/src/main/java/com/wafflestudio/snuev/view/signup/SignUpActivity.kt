@@ -51,6 +51,54 @@ class SignUpActivity : BaseActivity() {
                 finish()
             }
         })
+
+        viewModel.usernameFieldEmpty.observe(this, Observer { isEmpty ->
+            edit_layout_email.error = if (isEmpty == true) {
+                getString(R.string.error_username_empty)
+            } else {
+                null
+            }
+        })
+
+        viewModel.accountExists.observe(this, Observer { alreadyExists ->
+            edit_layout_email.error = if (alreadyExists == true) {
+                getString(R.string.error_account_exists)
+            } else {
+                null
+            }
+        })
+
+        viewModel.departmentFieldEmpty.observe(this, Observer { isEmpty ->
+            edit_layout_department.error = if (isEmpty == true) {
+                getString(R.string.error_department_empty)
+            } else {
+                null
+            }
+        })
+
+        viewModel.nicknameFieldEmpty.observe(this, Observer { isEmpty ->
+            edit_layout_nickname.error = if (isEmpty == true) {
+                getString(R.string.error_nickname_empty)
+            } else {
+                null
+            }
+        })
+
+        viewModel.passwordFieldEmpty.observe(this, Observer { isEmpty ->
+            edit_layout_password.error = if (isEmpty == true) {
+                getString(R.string.error_password_empty)
+            } else {
+                null
+            }
+        })
+
+        viewModel.passwordTooShort.observe(this, Observer { isTooShort ->
+            edit_layout_password.error = if (isTooShort == true) {
+                getString(R.string.error_password_too_short)
+            } else {
+                null
+            }
+        })
     }
 
     private fun setupEvents() {
