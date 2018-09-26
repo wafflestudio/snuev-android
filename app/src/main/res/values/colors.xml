@@ -4,11 +4,14 @@
     <color name="colorPrimaryLight">#194F48C4</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorBackground">#FFFFFF</color>
-    <color name="colorError">#E54459</color>
+    <color name="colorBackground">#00FFFFFF</color>
 
+    <color name="colorPrimarySelected">#2B2592</color>
+    <color name="colorSecondarySelected">#3D4F48C4</color>
+    <color name="colorError">#E54459</color>
     <color name="colorGoldenYellow">#FAC42D</color>
     <color name="colorOffWhite">#FFF9E1</color>
+    <color name="colorPaleGray">#E5F0F1F5</color>
     <color name="colorGrayBorder">#959AAC</color>
 
     <color name="transparent">#00FFFFFF</color>

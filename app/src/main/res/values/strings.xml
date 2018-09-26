@@ -102,13 +102,13 @@
     <!-- button -->
     <string name="button_leave_review">강의평 쓰기</string>
     <string name="button_register">등록</string>
-    <string name="button_change_password">변경하기</string>
     <string name="button_sign_in">로그인</string>
     <string name="button_sign_up">가입하기</string>
     <string name="button_to_sign_up">가입하기</string>
     <string name="button_to_find_password">비밀번호 찾기</string>
     <string name="button_to_sign_in">로그인하기</string>
     <string name="button_to_my_snu">mySNU 바로가기</string>
+    <string name="button_complete">완료</string>
 
     <!-- hint -->
     <string name="hint_leave_review">강의평을 입력하세요.</string>

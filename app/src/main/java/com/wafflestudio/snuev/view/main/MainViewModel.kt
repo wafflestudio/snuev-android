@@ -12,10 +12,10 @@ import io.reactivex.schedulers.Schedulers
 class MainViewModel : ViewModel() {
     private val disposables = CompositeDisposable()
 
-    var latestEvaluations: MutableLiveData<List<Evaluation>> = MutableLiveData()
-    var mostEvaluatedLectures: MutableLiveData<List<Lecture>> = MutableLiveData()
-    var topRatedLectures: MutableLiveData<List<Lecture>> = MutableLiveData()
-    var mostLikedEvaluations: MutableLiveData<List<Evaluation>> = MutableLiveData()
+    val latestEvaluations: MutableLiveData<List<Evaluation>> = MutableLiveData()
+    val mostEvaluatedLectures: MutableLiveData<List<Lecture>> = MutableLiveData()
+    val topRatedLectures: MutableLiveData<List<Lecture>> = MutableLiveData()
+    val mostLikedEvaluations: MutableLiveData<List<Evaluation>> = MutableLiveData()
 
 //    fetch lectures and evaluations
     fun fetchLatestEvaluations() {
