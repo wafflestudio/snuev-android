@@ -6,7 +6,7 @@
         <item name="android:background">@color/colorBackground</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
@@ -15,11 +15,13 @@
 
     <style name="PrimaryButton">
         <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="ToButton">
         <item name="android:background">@color/transparent</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:drawablePadding">6dp</item>
         <item name="android:drawableLeft">@drawable/ic_bullet</item>
         <item name="android:drawableStart">@drawable/ic_bullet</item>
@@ -43,5 +45,10 @@
         <item name="android:background">@drawable/bg_border_bottom_black_30</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="field_error">
+        <item name="android:textColor">@color/colorError</item>
+        <item name="android:textSize">12sp</item>
     </style>
 </resources>

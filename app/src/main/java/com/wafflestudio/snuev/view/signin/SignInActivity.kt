@@ -54,6 +54,38 @@ class SignInActivity : BaseActivity() {
                 finish()
             }
         })
+
+        viewModel.usernameFieldEmpty.observe(this, Observer { isEmpty ->
+            edit_layout_email.error = if (isEmpty == true) {
+                getString(R.string.error_username_empty)
+            } else {
+                null
+            }
+        })
+
+        viewModel.passwordFieldEmpty.observe(this, Observer { isEmpty ->
+            edit_layout_password.error = if (isEmpty == true) {
+                getString(R.string.error_password_empty)
+            } else {
+                null
+            }
+        })
+
+        viewModel.passwordTooShort.observe(this, Observer { isTooShort ->
+            edit_layout_password.error = if (isTooShort == true) {
+                getString(R.string.error_password_too_short)
+            } else {
+                null
+            }
+        })
+
+        viewModel.invalidCredentials.observe(this, Observer { isInvalid ->
+            edit_layout_password.error = if (isInvalid == true) {
+                getString(R.string.error_invalid_credentials)
+            } else {
+                null
+            }
+        })
     }
 
     private fun setupEvents() {

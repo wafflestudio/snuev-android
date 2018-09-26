@@ -112,6 +112,7 @@
     <!-- hint -->
     <string name="hint_leave_review">강의평을 입력하세요.</string>
     <string name="hint_my_snu_account">마이스누 계정</string>
+    <string name="hint_my_snu_domain">\@snu.ac.kr</string>
     <string name="hint_department">학과명 검색</string>
     <string name="hint_nickname">별명</string>
     <string name="hint_password">비밀번호</string>
@@ -128,4 +129,11 @@
     <string name="item_current_password">현재 비밀번호</string>
     <string name="item_new_password">새로운 비밀번호</string>
     <string name="item_check_password">비밀번호 확인</string>
+
+    <!-- error -->
+    <string name="error_network">네트워크 연결 오류가 발생했습니다</string>
+    <string name="error_username_empty">마이스누 계정을 입력해주세요</string>
+    <string name="error_password_empty">비밀번호를 입력해주세요</string>
+    <string name="error_invalid_credentials">마이스누 계정 혹은 비밀번호를 잘못 입력했습니다</string>
+    <string name="error_password_too_short">비밀번호가 너무 짧아요 ㅠㅠ</string>
 </resources>
