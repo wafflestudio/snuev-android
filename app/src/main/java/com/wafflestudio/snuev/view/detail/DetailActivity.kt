@@ -59,6 +59,8 @@ class DetailActivity : BaseActivity() {
     }
 
     private fun setupEvents() {
+        toggle_bookmark.clicks().subscribe { viewModel.toggleBookmark(lectureId) }
+
         button_leave_review.clicks().subscribe {
             button_leave_review.isEnabled = false
             EvaluateActivity.startActivity(this, lectureId, viewModel.lectureName.value ?: "")

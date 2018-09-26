@@ -55,11 +55,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_lecture_code"
                     />
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ToggleButton
+                    android:id="@+id/toggle_bookmark"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginStart="10dp"
+                    android:background="@drawable/toggle_bookmark"
+                    android:checked="@{viewmodel.bookmarked}"
+                    android:enabled="@{!viewmodel.isBookmarking}"
+                    android:textOff=""
+                    android:textOn=""
                     app:layout_constraintBottom_toBottomOf="@+id/text_lecture_name"
                     app:layout_constraintStart_toEndOf="@+id/text_lecture_name"
                     app:layout_constraintTop_toTopOf="@+id/text_lecture_name"

@@ -54,4 +54,10 @@ interface SnuevEndpoint {
             @Path("evaluation_id") evaluationId: String,
             @Query("vote[direction]") isUpVote: Boolean
     ) : Observable<Document>
+
+    @POST("v1/lectures/{lecture_id}/bookmark")
+    fun bookmark(@Path("lecture_id") lectureId: String): Observable<Document>
+
+    @DELETE("v1/lectures/{lecture_id}/bookmark")
+    fun unBookmark(@Path("lecture_id") lectureId: String): Observable<Document>
 }

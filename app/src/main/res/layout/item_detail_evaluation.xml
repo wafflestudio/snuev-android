@@ -56,7 +56,6 @@
             android:text="@{@string/score_0_decimals(evaluation.score)}"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
             />
 
         <TextView
@@ -79,7 +78,6 @@
             android:text="@{@string/score_0_decimals(evaluation.easiness)}"
             android:textSize="30sp"
             app:layout_constraintStart_toEndOf="@+id/text_criteria_score"
-            app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
             />
 
         <TextView
@@ -102,7 +100,6 @@
             android:text="@{@string/score_0_decimals(evaluation.grading)}"
             android:textSize="30sp"
             app:layout_constraintStart_toEndOf="@+id/text_criteria_easiness"
-            app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
             />
 
         <TextView
@@ -158,12 +155,12 @@
             />
 
         <ToggleButton
-            android:id="@+id/button_upvote"
+            android:id="@+id/toggle_up_vote"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="100dp"
             android:layout_marginRight="100dp"
-            android:background="@drawable/toggle_upvote"
+            android:background="@drawable/toggle_up_vote"
             android:scaleType="fitCenter"
             android:textOff=""
             android:textOn=""
@@ -175,26 +172,26 @@
             />
 
         <TextView
-            android:id="@+id/text_upvote_count"
+            android:id="@+id/text_up_vote_count"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
             android:layout_marginStart="6dp"
             android:text="@{`` + viewmodel.upVoteCount}"
             android:textColor="@color/black_40"
-            app:layout_constraintBottom_toBottomOf="@+id/button_upvote"
-            app:layout_constraintEnd_toStartOf="@+id/button_downvote"
-            app:layout_constraintStart_toEndOf="@+id/button_upvote"
-            app:layout_constraintTop_toTopOf="@+id/button_upvote"
+            app:layout_constraintBottom_toBottomOf="@+id/toggle_up_vote"
+            app:layout_constraintEnd_toStartOf="@+id/toggle_down_vote"
+            app:layout_constraintStart_toEndOf="@+id/toggle_up_vote"
+            app:layout_constraintTop_toTopOf="@+id/toggle_up_vote"
             />
 
         <ToggleButton
-            android:id="@+id/button_downvote"
+            android:id="@+id/toggle_down_vote"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="40dp"
             android:layout_marginRight="40dp"
-            android:background="@drawable/toggle_downvote"
+            android:background="@drawable/toggle_down_vote"
             android:scaleType="fitCenter"
             android:textOff=""
             android:textOn=""
@@ -206,17 +203,17 @@
             />
 
         <TextView
-            android:id="@+id/text_downvote_count"
+            android:id="@+id/text_down_vote_count"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
             android:layout_marginStart="6dp"
             android:text="@{`` + viewmodel.downVoteCount}"
             android:textColor="@color/black_40"
-            app:layout_constraintBottom_toBottomOf="@+id/button_downvote"
+            app:layout_constraintBottom_toBottomOf="@+id/toggle_down_vote"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_downvote"
-            app:layout_constraintTop_toTopOf="@+id/button_downvote"
+            app:layout_constraintStart_toEndOf="@+id/toggle_down_vote"
+            app:layout_constraintTop_toTopOf="@+id/toggle_down_vote"
             />
     </android.support.constraint.ConstraintLayout>
 </layout>
