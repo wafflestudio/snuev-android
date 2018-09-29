@@ -1,13 +1,11 @@
 package com.wafflestudio.snuev.view.profile
 
 import android.app.Activity
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.widget.LinearLayout
 import com.jakewharton.rxbinding2.view.clicks
 import com.wafflestudio.snuev.R
-import com.wafflestudio.snuev.databinding.ActivityProfileBinding
 import com.wafflestudio.snuev.preference.SnuevPreference
 import com.wafflestudio.snuev.view.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -23,15 +21,9 @@ class ProfileActivity : BaseActivity() {
         }
     }
 
-    private lateinit var viewModel: ProfileViewModel
-    private lateinit var binding: ActivityProfileBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_profile)
-        binding.viewmodel = viewModel
+        setContentView(R.layout.activity_profile)
 
         setupPager()
         setupViews()
@@ -50,6 +42,14 @@ class ProfileActivity : BaseActivity() {
 
     private fun setupViews() {
         text_nickname.text = SnuevPreference.user?.nickname ?: ""
+        val outerLayout = (tab_layout.getChildAt(0) as LinearLayout)
+        for (index in 0..(outerLayout.childCount - 1)) {
+            val layout = outerLayout.getChildAt(index) as LinearLayout
+            val layoutParams = layout.layoutParams as LinearLayout.LayoutParams
+            layoutParams.weight = 0f
+            layoutParams.width = LinearLayout.LayoutParams.WRAP_CONTENT
+            layout.layoutParams = layoutParams
+        }
     }
 
     private fun setupEvents() {

@@ -5,15 +5,17 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.wafflestudio.snuev.R
-import com.wafflestudio.snuev.view.profile.fragment.AboutFragment
-import com.wafflestudio.snuev.view.profile.fragment.ChangePasswordFragment
-import com.wafflestudio.snuev.view.profile.fragment.EvaluationsFragment
+import com.wafflestudio.snuev.view.profile.fragment.about.AboutFragment
+import com.wafflestudio.snuev.view.profile.fragment.bookmarkedlectures.BookmarkedLecturesFragment
+import com.wafflestudio.snuev.view.profile.fragment.changepassword.ChangePasswordFragment
+import com.wafflestudio.snuev.view.profile.fragment.myevaluations.MyEvaluationsFragment
 
-class ProfilePagerAdapter(val context: Context, fragementManager: FragmentManager) : FragmentPagerAdapter(fragementManager) {
+class ProfilePagerAdapter(val context: Context, fragmentManager: FragmentManager) : FragmentPagerAdapter(fragmentManager) {
     private val pages = arrayOf(
             Pair({ AboutFragment.newInstance() }, R.string.tab_about),
-            Pair({ ChangePasswordFragment.newInstance() }, R.string.tab_change_password),
-            Pair({ EvaluationsFragment.newInstance() }, R.string.tab_evaluations)
+            Pair({ MyEvaluationsFragment.newInstance() }, R.string.tab_my_evaluations),
+            Pair({ BookmarkedLecturesFragment.newInstance() }, R.string.tab_bookmarked_lectures),
+            Pair({ ChangePasswordFragment.newInstance() }, R.string.tab_change_password)
     )
 
     override fun getItem(position: Int): Fragment? = pages[position].first.invoke()

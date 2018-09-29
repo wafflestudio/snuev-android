@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     >
 
     <data>
-
-        <variable
-            name="viewmodel"
-            type="com.wafflestudio.snuev.view.detail.DetailEvaluationItemViewModel"
-            />
 
         <variable
             name="evaluation"
@@ -19,6 +15,11 @@
             name="lectureId"
             type="String"
             />
+
+        <variable
+            name="viewmodel"
+            type="com.wafflestudio.snuev.view.profile.fragment.myevaluations.MyEvaluationItemViewModel"
+            />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -26,16 +27,14 @@
         android:layout_height="wrap_content"
         >
 
-        <View
-            android:id="@+id/view"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:background="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/text_evaluation"
+        <TextView
+            android:id="@+id/text_lecture_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_evaluation"
+            app:layout_constraintTop_toTopOf="parent"
             />
-
 
         <TextView
             android:id="@+id/text_semester"
@@ -43,9 +42,19 @@
             android:layout_height="wrap_content"
             android:text="2017 봄"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@+id/text_grading"
+            app:layout_constraintBottom_toBottomOf="@+id/text_criteria_grading"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_grading"
+            />
+
+        <TextView
+            android:id="@+id/text_lecture_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black_60"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_lecture_name"
             />
 
         <TextView
@@ -56,6 +65,7 @@
             android:text="@{@string/score_0_decimals(evaluation.score)}"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
             />
 
         <TextView
@@ -80,6 +90,7 @@
             android:text="@{@string/score_0_decimals(evaluation.easiness)}"
             android:textSize="30sp"
             app:layout_constraintStart_toEndOf="@+id/text_criteria_score"
+            app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
             />
 
         <TextView
@@ -104,6 +115,7 @@
             android:text="@{@string/score_0_decimals(evaluation.grading)}"
             android:textSize="30sp"
             app:layout_constraintStart_toEndOf="@+id/text_criteria_easiness"
+            app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
             />
 
         <TextView
@@ -123,9 +135,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="9dp"
             android:text="@{evaluation.comment}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -137,26 +147,12 @@
             android:id="@+id/text_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginStart="20dp"
+            android:layout_marginBottom="30dp"
             android:layout_marginTop="10dp"
             android:text="@{evaluation.createdAt}"
             android:textColor="@color/black_40"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_evaluation"
-            />
-
-        <TextView
-            android:id="@+id/text_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/black_40"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/text_date"
             app:layout_constraintTop_toBottomOf="@+id/text_evaluation"
             />
 
@@ -173,8 +169,8 @@
             android:scaleType="fitCenter"
             android:textOff=""
             android:textOn=""
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_date"
             />
 
         <TextView
@@ -204,8 +200,8 @@
             android:scaleType="fitCenter"
             android:textOff=""
             android:textOn=""
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_date"
             />
 
         <TextView

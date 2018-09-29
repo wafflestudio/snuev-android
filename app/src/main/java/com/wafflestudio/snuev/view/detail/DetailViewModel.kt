@@ -7,14 +7,15 @@ import com.wafflestudio.snuev.model.resource.Evaluation
 import com.wafflestudio.snuev.model.resource.Lecture
 import com.wafflestudio.snuev.network.SnuevApi
 import com.wafflestudio.snuev.util.default
+import com.wafflestudio.snuev.viewmodel.BookmarkViewModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import moe.banana.jsonapi2.Document
 
-class DetailViewModel : ViewModel() {
-    private val disposables = CompositeDisposable()
+class DetailViewModel : ViewModel(), BookmarkViewModel {
+    override val disposables = CompositeDisposable()
 
     val lectureName = MutableLiveData<String>().default("")
     val professorName = MutableLiveData<String>().default("")
@@ -23,8 +24,8 @@ class DetailViewModel : ViewModel() {
     val grading = MutableLiveData<Float>().default(0f)
     val evaluations: MutableLiveData<List<Evaluation>> = MutableLiveData()
 
-    val bookmarked = ObservableField<Boolean>()
-    val isBookmarking = ObservableField(false)
+    override val bookmarked = ObservableField<Boolean>()
+    override val isBookmarking = ObservableField(false)
 
     fun fetchLecture(id: String) {
         disposables.add(SnuevApi.service.fetchLecture(id)
@@ -52,24 +53,6 @@ class DetailViewModel : ViewModel() {
         )
     }
 
-    fun toggleBookmark(id: String) {
-        var bookmarkObservable: Observable<Document>? = null
-        if (bookmarked.get() == true) {
-            bookmarkObservable = SnuevApi.service.unBookmark(id)
-        } else if (bookmarked.get() == false) {
-            bookmarkObservable = SnuevApi.service.bookmark(id)
-        }
-        bookmarkObservable
-                ?.subscribeOn(Schedulers.io())
-                ?.observeOn(AndroidSchedulers.mainThread())
-                ?.doOnSubscribe { onBookmarkRequest() }
-                ?.doOnTerminate { onBookmarkFinish() }
-                ?.subscribe({}) { onBookmarkFailure() }
-                ?.let { disposable ->
-                    disposables.add(disposable)
-                }
-    }
-
     private fun onFetchLectureRequest() {}
     private fun onFetchLectureFinish() {}
     private fun onFetchLectureSuccess(response: Lecture) {
@@ -93,19 +76,6 @@ class DetailViewModel : ViewModel() {
 
     private fun onFetchLectureEvaluationsFailure(error: Throwable) {
         error.printStackTrace()
-    }
-
-    private fun onBookmarkRequest() {
-        isBookmarking.set(true)
-        bookmarked.set(bookmarked.get() != true)
-    }
-
-    private fun onBookmarkFailure() {
-        bookmarked.set(bookmarked.get() != true)
-    }
-
-    private fun onBookmarkFinish() {
-        isBookmarking.set(false)
     }
 
     override fun onCleared() {

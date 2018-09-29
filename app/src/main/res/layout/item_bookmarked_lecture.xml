@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="lecture"
+            type="com.wafflestudio.snuev.model.resource.Lecture"
+            />
+
+        <variable
+            name="viewmodel"
+            type="com.wafflestudio.snuev.view.profile.fragment.bookmarkedlectures.BookmarkedLectureItemViewModel"
+            />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ToggleButton
+            android:id="@+id/toggle_bookmark"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/toggle_bookmark"
+            android:checked="@{viewmodel.bookmarked}"
+            android:onClick="@{() -> viewmodel.toggleBookmark(lecture.id)}"
+            android:enabled="@{!viewmodel.isBookmarking}"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintBottom_toBottomOf="@+id/text_lecture_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/text_lecture_name"
+            />
+
+        <TextView
+            android:id="@+id/text_lecture_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="@{lecture.name}"
+            android:textColor="@color/black_80"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/toggle_bookmark"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/text_lecture_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_60"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_lecture_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_lecture_name"
+            />
+
+        <TextView
+            android:id="@+id/text_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:text="@{@string/score_0_decimals(lecture.score)}"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="@+id/text_lecture_detail"
+            app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
+            />
+
+        <TextView
+            android:id="@+id/text_criteria_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:text="@string/criteria_score"
+            app:layout_constraintBottom_toBottomOf="@+id/text_score"
+            app:layout_constraintStart_toEndOf="@+id/text_score"
+            app:layout_constraintTop_toTopOf="@+id/text_score"
+            />
+
+        <TextView
+            android:id="@+id/text_easiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="9dp"
+            android:text="@{@string/score_0_decimals(lecture.easiness)}"
+            android:textSize="30sp"
+            app:layout_constraintStart_toEndOf="@+id/text_criteria_score"
+            app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
+            />
+
+        <TextView
+            android:id="@+id/text_criteria_easiness"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:text="@string/criteria_easiness"
+            app:layout_constraintBottom_toBottomOf="@+id/text_easiness"
+            app:layout_constraintStart_toEndOf="@+id/text_easiness"
+            app:layout_constraintTop_toTopOf="@+id/text_easiness"
+            />
+
+        <TextView
+            android:id="@+id/text_grading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="9dp"
+            android:text="@{@string/score_0_decimals(lecture.grading)}"
+            android:textSize="30sp"
+            app:layout_constraintStart_toEndOf="@+id/text_criteria_easiness"
+            app:layout_constraintTop_toBottomOf="@+id/text_lecture_detail"
+            />
+
+        <TextView
+            android:id="@+id/text_criteria_grading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/criteria_grading"
+            app:layout_constraintBottom_toBottomOf="@+id/text_grading"
+            app:layout_constraintStart_toEndOf="@+id/text_grading"
+            app:layout_constraintTop_toTopOf="@+id/text_grading"
+            />
+    </android.support.constraint.ConstraintLayout>
+</layout>

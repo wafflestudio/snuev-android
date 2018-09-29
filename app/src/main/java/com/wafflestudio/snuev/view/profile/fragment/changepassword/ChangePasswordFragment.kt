@@ -1,4 +1,4 @@
-package com.wafflestudio.snuev.view.profile.fragment
+package com.wafflestudio.snuev.view.profile.fragment.changepassword
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
