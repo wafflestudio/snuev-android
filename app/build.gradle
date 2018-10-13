@@ -21,6 +21,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
     }
     dataBinding {
         enabled = true
@@ -74,6 +79,9 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary"
     debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$leakcanary"
+
+    // Timber
+    implementation "com.jakewharton.timber:timber:$timber"
 }
 
 kapt {

@@ -18,6 +18,7 @@ class SnuevApplication : Application() {
         LeakCanary.install(this)
         SnuevPreference.init(this)
         SnuevApi.init(this)
+        TimberLog.init()
     }
 
     fun signOut() {
