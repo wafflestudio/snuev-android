@@ -2,6 +2,7 @@ package com.wafflestudio.snuev.view.detail
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -11,9 +12,11 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ActivityDetailBinding
 import com.wafflestudio.snuev.extension.visible
+import com.wafflestudio.snuev.network.SnuevApi
 import com.wafflestudio.snuev.view.base.BaseActivity
 import com.wafflestudio.snuev.view.evaluate.EvaluateActivity
 import kotlinx.android.synthetic.main.activity_detail.*
+import javax.inject.Inject
 
 class DetailActivity : BaseActivity() {
     companion object {
@@ -28,6 +31,10 @@ class DetailActivity : BaseActivity() {
         }
     }
 
+    @Inject
+    lateinit var api: SnuevApi
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: DetailViewModel
     private lateinit var binding: ActivityDetailBinding
     private val lectureId: String
@@ -36,7 +43,7 @@ class DetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[DetailViewModel::class.java]
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
         binding.viewmodel = viewModel
         binding.setLifecycleOwner(this)
@@ -70,6 +77,6 @@ class DetailActivity : BaseActivity() {
 
     private fun setupRecyclerViews() {
         list_evaluations.layoutManager = LinearLayoutManager(this)
-        list_evaluations.adapter = DetailEvaluationAdapter(this, viewModel.evaluations, lectureId.toString())
+        list_evaluations.adapter = DetailEvaluationAdapter(this, viewModel.evaluations, lectureId, api)
     }
 }

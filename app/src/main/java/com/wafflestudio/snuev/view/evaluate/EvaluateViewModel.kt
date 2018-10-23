@@ -8,8 +8,11 @@ import com.wafflestudio.snuev.util.default
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class EvaluateViewModel : ViewModel() {
+class EvaluateViewModel @Inject constructor(
+        private val api: SnuevApi
+) : ViewModel() {
     private val disposables = CompositeDisposable()
 
     val score = MutableLiveData<Int>().default(5)
@@ -26,7 +29,7 @@ class EvaluateViewModel : ViewModel() {
         evaluation.easiness = (easiness.value ?: 0).toFloat()
         evaluation.grading = (grading.value ?: 0).toFloat()
         evaluation.comment = comment.value ?: ""
-        val disposable = SnuevApi.service.createEvaluation(
+        val disposable = api.createEvaluation(
                 lectureId,
                 evaluation
         )

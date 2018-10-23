@@ -11,15 +11,16 @@ import moe.banana.jsonapi2.Document
 interface BookmarkViewModel {
     val disposables: CompositeDisposable
 
+    val api: SnuevApi
     val bookmarked: ObservableField<Boolean>
     val isBookmarking: ObservableField<Boolean>
 
     fun toggleBookmark(lectureId: String) {
         var bookmarkObservable: Observable<Document>? = null
         if (bookmarked.get() == true) {
-            bookmarkObservable = SnuevApi.service.unBookmark(lectureId)
+            bookmarkObservable = api.unBookmark(lectureId)
         } else if (bookmarked.get() == false) {
-            bookmarkObservable = SnuevApi.service.bookmark(lectureId)
+            bookmarkObservable = api.bookmark(lectureId)
         }
         bookmarkObservable
                 ?.subscribeOn(Schedulers.io())

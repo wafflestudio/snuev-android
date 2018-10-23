@@ -2,11 +2,15 @@ package com.wafflestudio.snuev.view.profile.fragment.myevaluations
 
 import android.arch.lifecycle.LifecycleOwner
 import android.databinding.ObservableField
+import com.wafflestudio.snuev.network.SnuevApi
 import com.wafflestudio.snuev.view.base.BaseItemViewModel
 import com.wafflestudio.snuev.viewmodel.VoteViewModel
 import io.reactivex.disposables.CompositeDisposable
 
-class MyEvaluationItemViewModel(lifecycleOwner: LifecycleOwner) :
+class MyEvaluationItemViewModel(
+        lifecycleOwner: LifecycleOwner,
+        override val api: SnuevApi
+) :
         BaseItemViewModel(lifecycleOwner),
         VoteViewModel {
     override val disposables: CompositeDisposable = CompositeDisposable()

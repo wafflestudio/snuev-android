@@ -16,8 +16,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import moe.banana.jsonapi2.Document
+import javax.inject.Inject
 
-class SignUpViewModel : ViewModel(), DepartmentViewModel {
+class SignUpViewModel @Inject constructor(
+        override val api: SnuevApi,
+        val preference: SnuevPreference
+) : ViewModel(), DepartmentViewModel {
     override val disposables = CompositeDisposable()
 
     init {
@@ -108,7 +112,7 @@ class SignUpViewModel : ViewModel(), DepartmentViewModel {
         nickname ?: return
         password ?: return
 
-        disposables.add(SnuevApi.service.signUp(SignUpRequest(
+        disposables.add(api.signUp(SignUpRequest(
                 username = username,
                 departmentId = departmentId,
                 nickname = nickname,
@@ -125,7 +129,7 @@ class SignUpViewModel : ViewModel(), DepartmentViewModel {
     }
 
     private fun fetchUser() {
-        disposables.add(SnuevApi.service.fetchUser()
+        disposables.add(api.fetchUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnTerminate { onFetchUserFinish() }
@@ -141,7 +145,7 @@ class SignUpViewModel : ViewModel(), DepartmentViewModel {
         val moshi = Moshi.Builder().build()
         val jsonAdapter = moshi.adapter(AuthTokenMeta::class.java)
         val authTokenMeta = response.meta.get<AuthTokenMeta>(jsonAdapter) as AuthTokenMeta
-        SnuevPreference.token = authTokenMeta.auth_token
+        preference.token = authTokenMeta.auth_token
         fetchUser()
     }
 
@@ -155,8 +159,9 @@ class SignUpViewModel : ViewModel(), DepartmentViewModel {
     private fun onFetchUserFinish() {
         isFetching.set(false)
     }
+
     private fun onFetchUserSuccess(response: User) {
-        SnuevPreference.user = response
+        preference.user = response
         user.value = response
     }
 

@@ -11,6 +11,7 @@ import io.reactivex.schedulers.Schedulers
 interface DepartmentViewModel {
     val disposables: CompositeDisposable
 
+    val api: SnuevApi
     val departments: MutableLiveData<List<Department>>
     val departmentSearchQuery: ObservableField<String>
     val departmentSearchResult: MutableLiveData<List<Department>>
@@ -26,7 +27,7 @@ interface DepartmentViewModel {
     fun selectDepartment(department: Department)
 
     fun fetchDepartments() {
-        val disposable = SnuevApi.service.fetchDepartments()
+        val disposable = api.fetchDepartments()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchDepartmentsRequest() }

@@ -8,8 +8,11 @@ import com.wafflestudio.snuev.network.SnuevApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class BookmarkedLecturesViewModel : ViewModel() {
+class BookmarkedLecturesViewModel @Inject constructor(
+        private val api: SnuevApi
+) : ViewModel() {
     private val disposables = CompositeDisposable()
 
     val bookmarkedLectures = MutableLiveData<List<Lecture>>()
@@ -20,7 +23,7 @@ class BookmarkedLecturesViewModel : ViewModel() {
     }
 
     private fun fetchBookmarkedLectures() {
-        disposables.add(SnuevApi.service.fetchBookmarked()
+        disposables.add(api.fetchBookmarked()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchBookmarkedLecturesRequest() }

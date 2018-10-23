@@ -9,6 +9,7 @@ import io.reactivex.schedulers.Schedulers
 interface VoteViewModel {
     val disposables: CompositeDisposable
 
+    val api: SnuevApi
     val upVoted: ObservableField<Boolean>
     val downVoted: ObservableField<Boolean>
 
@@ -19,7 +20,7 @@ interface VoteViewModel {
     val downVoting: ObservableField<Boolean>
 
     fun vote(lectureId: String, evaluationId: String, isUpVote: Boolean) {
-        disposables.add(SnuevApi.service.vote(lectureId, evaluationId, isUpVote)
+        disposables.add(api.vote(lectureId, evaluationId, isUpVote)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onVoteRequest(isUpVote) }

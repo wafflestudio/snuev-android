@@ -8,13 +8,14 @@ import com.wafflestudio.snuev.model.resource.Lecture
 import com.wafflestudio.snuev.network.SnuevApi
 import com.wafflestudio.snuev.util.default
 import com.wafflestudio.snuev.viewmodel.BookmarkViewModel
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import moe.banana.jsonapi2.Document
+import javax.inject.Inject
 
-class DetailViewModel : ViewModel(), BookmarkViewModel {
+class DetailViewModel @Inject constructor(
+        override val api: SnuevApi
+) : ViewModel(), BookmarkViewModel {
     override val disposables = CompositeDisposable()
 
     val lectureName = MutableLiveData<String>().default("")
@@ -28,7 +29,7 @@ class DetailViewModel : ViewModel(), BookmarkViewModel {
     override val isBookmarking = ObservableField(false)
 
     fun fetchLecture(id: String) {
-        disposables.add(SnuevApi.service.fetchLecture(id)
+        disposables.add(api.fetchLecture(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchLectureRequest() }
@@ -41,7 +42,7 @@ class DetailViewModel : ViewModel(), BookmarkViewModel {
     }
 
     fun fetchLectureEvaluations(id: String, page: Int) {
-        disposables.add(SnuevApi.service.fetchLectureEvaluations(id, page)
+        disposables.add(api.fetchLectureEvaluations(id, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchLectureEvaluationsRequest() }

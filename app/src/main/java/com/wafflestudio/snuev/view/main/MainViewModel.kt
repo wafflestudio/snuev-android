@@ -8,8 +8,11 @@ import com.wafflestudio.snuev.network.SnuevApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+class MainViewModel @Inject constructor(
+        private val api: SnuevApi
+) : ViewModel() {
     private val disposables = CompositeDisposable()
 
     val latestEvaluations: MutableLiveData<List<Evaluation>> = MutableLiveData()
@@ -17,9 +20,9 @@ class MainViewModel : ViewModel() {
     val topRatedLectures: MutableLiveData<List<Lecture>> = MutableLiveData()
     val mostLikedEvaluations: MutableLiveData<List<Evaluation>> = MutableLiveData()
 
-//    fetch lectures and evaluations
+    //    fetch lectures and evaluations
     fun fetchLatestEvaluations() {
-        val disposable = SnuevApi.service.fetchLatestEvaluations()
+        val disposable = api.fetchLatestEvaluations()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchLatestEvaluationsRequest() }
@@ -32,7 +35,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun fetchMostEvaluatedLectures() {
-        val disposable = SnuevApi.service.fetchMostEvaluatedLectures()
+        val disposable = api.fetchMostEvaluatedLectures()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchMostEvaluatedLecturesRequest() }
@@ -45,7 +48,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun fetchTopRatedLectures() {
-        val disposable = SnuevApi.service.fetchTopRatedLectures()
+        val disposable = api.fetchTopRatedLectures()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchTopRatedLecturesRequest() }
@@ -58,7 +61,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun fetchMostLikedEvaluations() {
-         val disposable = SnuevApi.service.fetchMostLikedEvaluations()
+        val disposable = api.fetchMostLikedEvaluations()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchMostLikedEvaluationsRequest() }
@@ -70,47 +73,55 @@ class MainViewModel : ViewModel() {
         disposables.add(disposable)
     }
 
-//    Latest Evaluations
+    //    Latest Evaluations
     private fun onFetchLatestEvaluationsRequest() {}
+
     private fun onFetchLatestEvaluationsFinish() {}
     private fun onFetchLatestEvaluationsSuccess(response: List<Evaluation>) {
         latestEvaluations.value = response.take(3)
     }
+
     private fun onFetchLatestEvaluationsFailure(error: Throwable) {
         error.printStackTrace()
     }
 
-//    Most Evaluated Lectures
+    //    Most Evaluated Lectures
     private fun onFetchMostEvaluatedLecturesRequest() {}
+
     private fun onFetchMostEvaluatedLecturesFinish() {}
     private fun onFetchMostEvaluatedLecturesSuccess(response: List<Lecture>) {
         mostEvaluatedLectures.value = response.take(3)
     }
+
     private fun onFetchMostEvaluatedLecturesFailure(error: Throwable) {
         error.printStackTrace()
     }
 
-//    Top Rated Lectures
+    //    Top Rated Lectures
     private fun onFetchTopRatedLecturesRequest() {}
+
     private fun onFetchTopRatedLecturesFinish() {}
     private fun onFetchTopRatedLecturesSuccess(response: List<Lecture>) {
         topRatedLectures.value = response.take(3)
     }
+
     private fun onFetchTopRatedLecturesFailure(error: Throwable) {
         error.printStackTrace()
     }
 
-//    Most Liked Evaluations
+    //    Most Liked Evaluations
     private fun onFetchMostLikedEvaluationsRequest() {}
+
     private fun onFetchMostLikedEvaluationsFinish() {}
     private fun onFetchMostLikedEvaluationsSuccess(response: List<Evaluation>) {
         mostLikedEvaluations.value = response.take(3)
     }
+
     private fun onFetchMostLikedEvaluationsFailure(error: Throwable) {
         error.printStackTrace()
     }
 
-//    Clear
+    //    Clear
     override fun onCleared() {
         super.onCleared()
         disposables.dispose()

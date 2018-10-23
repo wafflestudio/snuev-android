@@ -2,6 +2,7 @@ package com.wafflestudio.snuev.view.search
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -21,6 +22,7 @@ import com.wafflestudio.snuev.view.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.bar_search.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class SearchActivity : BaseActivity() {
     companion object {
@@ -33,6 +35,8 @@ class SearchActivity : BaseActivity() {
         }
     }
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: SearchViewModel
     private lateinit var binding: ActivitySearchBinding
 
@@ -41,7 +45,7 @@ class SearchActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[SearchViewModel::class.java]
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
         binding.viewmodel = viewModel
 

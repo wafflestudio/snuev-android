@@ -10,24 +10,12 @@ import com.wafflestudio.snuev.util.PREFERENCE_AUTH_TOKEN_KEY
 import com.wafflestudio.snuev.util.PREFERENCE_USER_KEY
 import moe.banana.jsonapi2.Document
 import moe.banana.jsonapi2.ResourceAdapterFactory
+import javax.inject.Inject
 
-object SnuevPreference {
-    private var sharedPreferences: SharedPreferences? = null
-    private var moshi: Moshi? = null
-
-    fun init(context: Context) {
-        if (sharedPreferences == null) {
-            sharedPreferences = context.getSharedPreferences(PREFERENCE, Context.MODE_PRIVATE)
-        }
-        val jsonAdapterFactory = ResourceAdapterFactory.builder()
-                .add(Department::class.java)
-                .add(User::class.java)
-                .build()
-        moshi = Moshi.Builder()
-                .add(jsonAdapterFactory)
-                .build()
-    }
-
+class SnuevPreference(
+        private val sharedPreferences: SharedPreferences,
+        private val moshi: Moshi
+) {
     var token: String?
         get() = readString(PREFERENCE_AUTH_TOKEN_KEY)
         set(token) {
@@ -38,32 +26,25 @@ object SnuevPreference {
 
     var user: User?
         get() {
-            val moshi = moshi ?: return null
             val encoded = readString(PREFERENCE_USER_KEY) ?: return null
             val document = moshi.adapter(Document::class.java).fromJson(encoded)
             return document?.asObjectDocument<User>()?.get()
         }
         set(value) {
-            val moshi = moshi ?: return
             value?.let {
                 writeString(PREFERENCE_USER_KEY, moshi.adapter(Document::class.java).toJson(it.document))
             }
         }
 
     fun clear() {
-        val sharedPreferences = sharedPreferences ?: return
         val edit = sharedPreferences.edit()
         edit.clear()
         edit.apply()
     }
 
-    private fun readString(key: String): String? {
-        val sharedPreferences = sharedPreferences ?: return null
-        return sharedPreferences.getString(key, null)
-    }
+    private fun readString(key: String): String? = sharedPreferences.getString(key, null)
 
     private fun writeString(key: String, value: String, callback: (() -> Unit)? = null) {
-        val sharedPreferences = sharedPreferences ?: return
         val edit = sharedPreferences.edit()
         edit.putString(key, value)
         callback?.let {

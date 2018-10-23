@@ -2,6 +2,7 @@ package com.wafflestudio.snuev.view.signup
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -16,6 +17,7 @@ import com.wafflestudio.snuev.extension.visible
 import com.wafflestudio.snuev.view.adapter.DepartmentAdapter
 import com.wafflestudio.snuev.view.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import javax.inject.Inject
 
 class SignUpActivity : BaseActivity() {
     companion object {
@@ -29,13 +31,15 @@ class SignUpActivity : BaseActivity() {
         }
     }
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: SignUpViewModel
     private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(SignUpViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[SignUpViewModel::class.java]
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up)
         binding.viewmodel = viewModel
 

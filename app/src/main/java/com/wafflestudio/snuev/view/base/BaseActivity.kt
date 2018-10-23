@@ -1,9 +1,9 @@
 package com.wafflestudio.snuev.view.base
 
-import android.support.v7.app.AppCompatActivity
 import com.wafflestudio.snuev.SnuevApplication
+import dagger.android.support.DaggerAppCompatActivity
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : DaggerAppCompatActivity() {
     val application: SnuevApplication
     get() = super.getApplication() as SnuevApplication
 }

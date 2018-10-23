@@ -1,6 +1,7 @@
 package com.wafflestudio.snuev.view.evaluate
 
 import android.app.Activity
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -10,6 +11,7 @@ import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ActivityEvaluateBinding
 import com.wafflestudio.snuev.view.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_evaluate.*
+import javax.inject.Inject
 
 class EvaluateActivity : BaseActivity() {
     companion object {
@@ -26,6 +28,8 @@ class EvaluateActivity : BaseActivity() {
         }
     }
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: EvaluateViewModel
     private lateinit var binding: ActivityEvaluateBinding
 
@@ -37,7 +41,7 @@ class EvaluateActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(EvaluateViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[EvaluateViewModel::class.java]
         binding = DataBindingUtil.setContentView(this, R.layout.activity_evaluate)
         binding.viewmodel = viewModel
         binding.setLifecycleOwner(this)

@@ -10,6 +10,7 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.databinding.ItemBookmarkedLectureBinding
 import com.wafflestudio.snuev.model.resource.Lecture
+import com.wafflestudio.snuev.network.SnuevApi
 import com.wafflestudio.snuev.view.base.BaseAdapter
 import com.wafflestudio.snuev.view.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_main_evaluation.view.*
@@ -17,13 +18,14 @@ import kotlinx.android.synthetic.main.item_main_evaluation.view.*
 class BookmarkedLectureAdapter(
         private val fragment: Fragment,
         items: MutableLiveData<List<Lecture>>,
+        private val api: SnuevApi,
         private val onItemClick: (Lecture) -> Unit
 ) : BaseAdapter<Lecture, BookmarkedLectureAdapter.LectureHolder>(fragment, items) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LectureHolder {
         val view = LayoutInflater
                 .from(parent.context)
                 .inflate(R.layout.item_bookmarked_lecture, parent, false)
-        return LectureHolder(view, fragment, this, onItemClick)
+        return LectureHolder(view, fragment, this, api, onItemClick)
     }
 
     var itemsClickable = true
@@ -32,10 +34,11 @@ class BookmarkedLectureAdapter(
             view: View,
             fragment: Fragment,
             private val adapter: BookmarkedLectureAdapter,
+            api: SnuevApi,
             private val onItemClick: (Lecture) -> Unit
     ) : BaseViewHolder<Lecture>(view) {
         private lateinit var lecture: Lecture
-        private val viewModel = BookmarkedLectureItemViewModel(fragment)
+        private val viewModel = BookmarkedLectureItemViewModel(fragment, api)
         private val binding by lazy { DataBindingUtil.bind<ItemBookmarkedLectureBinding>(view) }
 
         override fun bind(data: Lecture, position: Int) {

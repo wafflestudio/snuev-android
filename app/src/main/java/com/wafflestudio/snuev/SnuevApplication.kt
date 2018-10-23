@@ -1,13 +1,15 @@
 package com.wafflestudio.snuev
 
-import android.app.Application
 import android.content.Intent
 import com.squareup.leakcanary.LeakCanary
-import com.wafflestudio.snuev.network.SnuevApi
+import com.wafflestudio.snuev.di.DaggerAppComponent
 import com.wafflestudio.snuev.preference.SnuevPreference
 import com.wafflestudio.snuev.view.signin.SignInActivity
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
+import javax.inject.Inject
 
-class SnuevApplication : Application() {
+class SnuevApplication : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         if (LeakCanary.isInAnalyzerProcess(this)) {
@@ -16,13 +18,14 @@ class SnuevApplication : Application() {
             return
         }
         LeakCanary.install(this)
-        SnuevPreference.init(this)
-        SnuevApi.init(this)
         TimberLog.init()
     }
 
-    fun signOut() {
-        SnuevPreference.clear()
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> =
+            DaggerAppComponent.builder().create(this)
+
+    fun signOut(preference: SnuevPreference) {
+        preference.clear()
         val intent = Intent(this, SignInActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

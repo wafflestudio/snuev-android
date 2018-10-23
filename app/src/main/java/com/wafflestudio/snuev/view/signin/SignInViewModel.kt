@@ -4,7 +4,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableField
 import com.squareup.moshi.Moshi
-import com.wafflestudio.snuev.extension.document
 import com.wafflestudio.snuev.extension.errorTitles
 import com.wafflestudio.snuev.model.meta.AuthTokenMeta
 import com.wafflestudio.snuev.model.resource.User
@@ -14,8 +13,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import moe.banana.jsonapi2.Document
+import javax.inject.Inject
 
-class SignInViewModel : ViewModel() {
+class SignInViewModel @Inject constructor(
+        private val api: SnuevApi,
+        private val preference: SnuevPreference
+) : ViewModel() {
     private val disposables = CompositeDisposable()
 
     val username = ObservableField<String>()
@@ -70,7 +73,7 @@ class SignInViewModel : ViewModel() {
         username ?: return
         password ?: return
 
-        disposables.add(SnuevApi.service.signIn(username, password)
+        disposables.add(api.signIn(username, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onSignInRequest() }
@@ -82,7 +85,7 @@ class SignInViewModel : ViewModel() {
     }
 
     private fun fetchUser() {
-        disposables.add(SnuevApi.service.fetchUser()
+        disposables.add(api.fetchUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnTerminate { onFetchUserFinish() }
@@ -98,7 +101,7 @@ class SignInViewModel : ViewModel() {
         val moshi = Moshi.Builder().build()
         val jsonAdapter = moshi.adapter(AuthTokenMeta::class.java)
         val authTokenMeta = response.meta.get<AuthTokenMeta>(jsonAdapter) as AuthTokenMeta
-        SnuevPreference.token = authTokenMeta.auth_token
+        preference.token = authTokenMeta.auth_token
         fetchUser()
     }
 
@@ -114,7 +117,7 @@ class SignInViewModel : ViewModel() {
     }
 
     private fun onFetchUserSuccess(response: User) {
-        SnuevPreference.user = response
+        preference.user = response
         user.value = response
     }
 

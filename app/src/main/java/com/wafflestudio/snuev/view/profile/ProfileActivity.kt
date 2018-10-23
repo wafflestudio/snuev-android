@@ -9,6 +9,7 @@ import com.wafflestudio.snuev.R
 import com.wafflestudio.snuev.preference.SnuevPreference
 import com.wafflestudio.snuev.view.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_profile.*
+import javax.inject.Inject
 
 class ProfileActivity : BaseActivity() {
     companion object {
@@ -20,6 +21,9 @@ class ProfileActivity : BaseActivity() {
             activity.startActivityForResult(intent, REQUEST_CODE)
         }
     }
+
+    @Inject
+    lateinit var preference: SnuevPreference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +45,7 @@ class ProfileActivity : BaseActivity() {
     }
 
     private fun setupViews() {
-        text_nickname.text = SnuevPreference.user?.nickname ?: ""
+        text_nickname.text = preference.user?.nickname ?: ""
         val outerLayout = (tab_layout.getChildAt(0) as LinearLayout)
         for (index in 0..(outerLayout.childCount - 1)) {
             val layout = outerLayout.getChildAt(index) as LinearLayout
@@ -55,7 +59,7 @@ class ProfileActivity : BaseActivity() {
     private fun setupEvents() {
         btn_sign_out.clicks().subscribe {
             btn_sign_out.isEnabled = false
-            application.signOut()
+            application.signOut(preference)
         }
     }
 }

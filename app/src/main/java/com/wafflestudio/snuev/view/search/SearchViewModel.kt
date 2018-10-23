@@ -13,8 +13,11 @@ import com.wafflestudio.snuev.viewmodel.DepartmentViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class SearchViewModel : ViewModel(), DepartmentViewModel {
+class SearchViewModel @Inject constructor(
+        override val api: SnuevApi
+) : ViewModel(), DepartmentViewModel {
     override val disposables = CompositeDisposable()
 
     init {
@@ -66,7 +69,7 @@ class SearchViewModel : ViewModel(), DepartmentViewModel {
     var searchResultLectures: MutableLiveData<List<Lecture>> = MutableLiveData()
 
     fun searchLectures(query: String) {
-        disposables.add(SnuevApi.service.searchLectures(query)
+        disposables.add(api.searchLectures(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onSearchLecturesRequest() }

@@ -10,8 +10,12 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
 import java.net.HttpURLConnection
+import javax.inject.Inject
 
-class SplashViewModel : ViewModel() {
+class SplashViewModel @Inject constructor(
+        private val api: SnuevApi,
+        private val preference: SnuevPreference
+) : ViewModel() {
     private val disposables = CompositeDisposable()
 
     val user: MutableLiveData<User> = MutableLiveData()
@@ -19,7 +23,7 @@ class SplashViewModel : ViewModel() {
     val errorFetchUser: MutableLiveData<Boolean> = MutableLiveData()
 
     fun fetchUser() {
-        disposables.add(SnuevApi.service.fetchUser()
+        disposables.add(api.fetchUser()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onFetchUserRequest() }
@@ -35,7 +39,7 @@ class SplashViewModel : ViewModel() {
     private fun onFetchUserFinish() {}
 
     private fun onFetchUserSuccess(response: User) {
-        SnuevPreference.user = response
+        preference.user = response
         user.value = response
     }
 

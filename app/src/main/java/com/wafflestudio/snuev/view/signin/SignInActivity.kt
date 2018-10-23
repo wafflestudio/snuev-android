@@ -2,6 +2,7 @@ package com.wafflestudio.snuev.view.signin
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
@@ -15,6 +16,7 @@ import com.wafflestudio.snuev.view.signup.SignUpActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 class SignInActivity : BaseActivity() {
     companion object {
@@ -28,13 +30,15 @@ class SignInActivity : BaseActivity() {
         }
     }
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var viewModel: SignInViewModel
     private lateinit var binding: ActivitySignInBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(SignInViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[SignInViewModel::class.java]
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_in)
         binding.viewmodel = viewModel
 
