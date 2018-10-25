@@ -52,9 +52,6 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
 
-    // OkHttp
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
-
     // Moshi
     implementation 'com.squareup.moshi:moshi:1.5.0'
     implementation "moe.banana:moshi-jsonapi:$moshi_jsonapi_version"
@@ -81,6 +78,10 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakcanary_version"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakcanary_version"
     debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$leakcanary_version"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho:$stetho_version"
+    implementation "com.facebook.stetho:stetho-okhttp3:$stetho_version"
 
     // Timber
     implementation "com.jakewharton.timber:timber:$timber_version"
